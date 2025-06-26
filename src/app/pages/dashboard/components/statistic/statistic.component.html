@@ -1,1 +1,41 @@
-<p>statistic works!</p>
+<div class="bg-[var(--foreground)] py-7 pr-10 pl-8 rounded-2xl max-h-96" #chart>
+  <div class='flex items-center justify-between'>
+    <h2 class='font-bold text-2xl text-[var(--text)]'>Projects Statistics</h2>
+    <div class="flex gap-4 mb-4">
+      <button
+        class="px-4 py-1 rounded bg-[var(--primary)] text-white cursor-pointer"
+        [class.opacity-70]="viewMode === 'month'"
+        (click)="switchView('month')"
+      >
+        Month
+      </button>
+
+      <button
+        class="px-4 py-1 rounded bg-[var(--primary)] text-white cursor-pointer"
+        [class.opacity-70]="viewMode === 'year'"
+        (click)="switchView('year')"
+      >
+        Year
+      </button>
+    </div>
+  </div>
+  @if (viewMode === 'month') {
+    <apx-chart
+      [series]="chartOptionsMonth.series"
+      [chart]="chartOptionsMonth.chart"
+      [xaxis]="chartOptionsMonth.xaxis"
+      [stroke]="chartOptionsMonth.stroke"
+      [tooltip]="chartOptionsMonth.tooltip"
+      [dataLabels]="chartOptionsMonth.dataLabels"
+    ></apx-chart>
+  } @else {
+    <apx-chart
+      [series]="chartOptionsYear.series"
+      [chart]="chartOptionsYear.chart"
+      [xaxis]="chartOptionsYear.xaxis"
+      [stroke]="chartOptionsYear.stroke"
+      [tooltip]="chartOptionsYear.tooltip"
+      [dataLabels]="chartOptionsYear.dataLabels"
+    ></apx-chart>
+  }
+</div>
