@@ -1,3 +1,25 @@
-<div class='p-7'>
-
+<div class="p-7">
+  <div class="grid grid-cols-[1fr_2fr] gap-4">
+    <div>
+      <app-card
+        color='bg-[var(--purple-light)]'
+        title='Active projects'
+        img='/png/projects/active-projects.svg'
+        info='92'
+      />
+      <app-card
+        color='bg-[var(--yellow)]'
+        title='On Going Project'
+        img='/png/projects/ongoing-projects.svg'
+        info='35'
+      />
+      <app-card
+        color='bg-[var(--pink)]'
+        title='Working hours'
+        img='/png/projects/working-hours.svg'
+        info='19h 9m'
+      />
+    </div>
+    <app-statistic />
+  </div>
 </div>

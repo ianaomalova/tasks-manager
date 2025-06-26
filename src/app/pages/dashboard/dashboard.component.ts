@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
-import {ThemeToggleComponent} from '../../components/ui/theme-toggle/theme-toggle.component';
+import { CardComponent } from './components/card/card.component';
+import { StatisticComponent } from './components/statistic/statistic.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [
-    ThemeToggleComponent
-  ],
+  imports: [CardComponent, StatisticComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent {
-
-}
+export class DashboardComponent {}
