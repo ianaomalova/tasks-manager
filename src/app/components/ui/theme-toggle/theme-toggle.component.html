@@ -1,0 +1,19 @@
+@if ((themeService.isDarkMode$ | async) === true) {
+  <button class='cursor-pointer ml-4' (click)='toggleTheme()'>
+    <lucide-angular
+      [img]='Sun'
+      class='text-[var(--yellow)]'
+    >
+    </lucide-angular>
+
+  </button>
+} @else {
+  <button class='cursor-pointer ml-4' (click)='toggleTheme()'>
+    <lucide-angular
+      [img]='MoonStar'
+      class='text-[var(--primary)]'
+    >
+    </lucide-angular>
+
+  </button>
+}

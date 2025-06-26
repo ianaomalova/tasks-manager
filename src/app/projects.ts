@@ -1,4 +1,6 @@
-export const projects = [
+import {IProjectItem} from './models/project-item.interface';
+
+export const projects: IProjectItem[] = [
   { name: 'Landing page', color: 'bg-yellow-500' },
   { name: 'Mobile App', color: 'bg-pink-700' },
   { name: 'Dashboard', color: 'bg-blue-700' },

@@ -1,19 +1,24 @@
-<div class='pt-10 px-4'>
+<div class='pt-8 px-4 relative bg-[var(--foreground)]'>
+  <lucide-angular
+    [img]='Columns2'
+    color='gray'
+    class='absolute right-2 cursor-pointer'
+  >
+  </lucide-angular>
   <div class='mb-7'>
     <p class='text-gray-300 mb-3'>Account</p>
-    <div class='h-15 mb-3 rounded-4xl flex items-center justify-between px-2 account-bg'>
+    <div class='h-15 mb-3 rounded-4xl flex items-center justify-between px-2 bg-[var(--light-gray)]'>
       <div class='flex items-center gap-3'>
-        <div class='rounded-full bg-purple-400 w-12 h-12'></div>
+        <div class='rounded-full bg-[var(--primary)] w-12 h-12'></div>
         <div>
-          <p class='font-bold'>Iana Malova</p>
+          <p class='font-bold text-[var(--text)]'>Iana Malova</p>
           <p class='text-sm text-gray-400'>mail&#64;gmail.com</p>
         </div>
       </div>
       <button class='pr-2 cursor-pointer'>
         <lucide-angular
           [img]="ChevronDown"
-          class="my-icon"
-          color='gray'
+          class="text-gray-500"
         >
         </lucide-angular>
       </button>
@@ -24,15 +29,27 @@
     @for (item of menuItems; track item.title) {
       <a
         [routerLink]='item.link'
-        routerLinkActive='active'
-        class='flex items-center gap-3 py-3 px-4 mb-2 rounded-4xl menu-item text-gray-500 font-light'
+        routerLinkActive='bg-[var(--primary)] text-white'
+        class='flex items-center justify-between py-3 px-4 mb-1 rounded-4xl menu-item text-gray-500 font-light'
       >
-        <lucide-angular
-          [img]="item.icon"
-          class="my-icon"
-        >
-        </lucide-angular>
-        <p>{{item.title}}</p>
+        <div class='flex items-center gap-3'>
+          <lucide-angular
+            [img]="item.icon"
+            class="my-icon"
+            [ngClass]="{'!text-white': isActive(item.link)}"
+          >
+          </lucide-angular>
+          <p>{{item.title}}</p>
+        </div>
+
+        @if (item.badge) {
+          <p
+            class='bg-purple-200 rounded-lg px-3'
+            [ngClass]="{'text-black': isActive(item.link)}"
+          >
+            {{item.badge}}
+          </p>
+        }
       </a>
     }
   </div>
@@ -45,7 +62,7 @@
           [class]='project.color'
         >
         </div>
-        <p>{{project.name}}</p>
+        <p class='text-gray-500'>{{project.name}}</p>
       </div>
     }
   </div>

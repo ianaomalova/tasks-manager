@@ -15,30 +15,37 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    data: { title: 'Dashboard' },
   },
   {
     path: 'insight',
-    component: InsightsComponent
+    component: InsightsComponent,
+    data: { title: 'Insight' },
   },
   {
     path: 'messages',
-    component: MessagesComponent
+    component: MessagesComponent,
+    data: { title: 'Messages' },
   },
   {
     path: 'report',
-    component: ReportsComponent
+    component: ReportsComponent,
+    data: { title: 'Report' },
   },
   {
     path: 'settings',
-    component: SettingsComponent
+    component: SettingsComponent,
+    data: { title: 'Settings' },
   },
   {
     path: 'schedule',
-    component: ScheduleComponent
+    component: ScheduleComponent,
+    data: { title: 'Schedule' },
   },
   {
     path: 'team',
-    component: TeamComponent
+    component: TeamComponent,
+    data: { title: 'Team' },
   },
 ];

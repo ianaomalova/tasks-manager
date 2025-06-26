@@ -1,4 +1,4 @@
 export interface IProjectItem {
-  color: 'string'
+  color: string
   name: string
 }
