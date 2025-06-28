@@ -1,0 +1,43 @@
+<div class='bg-[var(--foreground)] rounded-2xl p-4'>
+  <div class='grid grid-rows-3 gap-5'>
+    <div class='row-span-1 flex items-start justify-between'>
+      <div class='flex gap-4'>
+        <div class='bg-purple-100 rounded-full w-10 h-10 flex items-center justify-center'>
+          <lucide-icon [img]='Plane'></lucide-icon>
+        </div>
+        <p class='w-20 text-[var(--text)]'>Travel App User Flow</p>
+      </div>
+      <div class='flex items-center'>
+        <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
+        <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
+        <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
+      </div>
+    </div>
+    <div class='row-span-1'>
+      <app-progress
+        [progress]='progress'
+      />
+    </div>
+    <div class='row-span-1 flex items-center justify-between'>
+      <div class='flex items-center gap-3'>
+        <p class='flex items-center gap-2 text-[var(--text)] font-light'>
+          <lucide-icon [img]='MessageSquareText' class='text-gray-500' size='20' strokeWidth='1.5'></lucide-icon>
+          3
+        </p>
+        <p class='flex items-center gap-2 text-[var(--text)] font-light'>
+          <lucide-icon
+            [img]='Image' class='text-gray-500' size='20' strokeWidth='1.5'></lucide-icon>
+          6
+        </p>
+        <p class='flex items-center gap-2 text-[var(--text)] font-light'>
+          <lucide-icon [img]='SquareArrowOutUpRight' class='text-gray-500' size='20' strokeWidth='1.5'></lucide-icon>
+          5
+        </p>
+      </div>
+      <div class='flex items-center gap-2'>
+        <app-add-button />
+        <app-edit-button />
+      </div>
+    </div>
+  </div>
+</div>

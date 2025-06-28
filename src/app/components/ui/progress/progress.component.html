@@ -1,0 +1,13 @@
+<div class='bg-purple-100 rounded-3xl h-10 overflow-hidden'>
+  <div
+    [class]='className()'
+    [style.width.%]="progress"
+    class='h-10 flex items-center justify-center progress-bar-striped'
+  >
+    @if (progress >= 15 && progress < 100) {
+      <p class='text-[var(--text)]'>{{progress}}%</p>
+    } @else if (progress === 100){
+      <p class='text-[var(--text)]'>Done</p>
+    }
+  </div>
+</div>

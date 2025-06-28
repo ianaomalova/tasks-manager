@@ -1,25 +1,40 @@
 <div class="p-7">
-  <div class="grid grid-cols-[1fr_2fr] gap-4">
-    <div class='max-h-96'>
+  <div class="grid grid-cols-[1fr_2fr] gap-6 mb-8">
+    <div class="max-h-96 max-w-full">
       <app-card
-        color='bg-[var(--purple-light)]'
-        title='Active projects'
-        img='/png/projects/active-projects.svg'
-        info='92'
+        color="bg-[var(--purple-light)]"
+        title="Active projects"
+        img="/png/projects/active-projects.svg"
+        info="92"
       />
       <app-card
-        color='bg-[var(--yellow)]'
-        title='On Going Project'
-        img='/png/projects/ongoing-projects.svg'
-        info='35'
+        color="bg-[var(--yellow)]"
+        title="On Going Project"
+        img="/png/projects/ongoing-projects.svg"
+        info="35"
       />
       <app-card
-        color='bg-[var(--pink)]'
-        title='Working hours'
-        img='/png/projects/working-hours.svg'
-        info='19h 9m'
+        color="bg-[var(--pink)]"
+        title="Working hours"
+        img="/png/projects/working-hours.svg"
+        info="19h 9m"
       />
     </div>
     <app-statistic />
+  </div>
+
+  <h2 class='mb-4 font-medium text-2xl'>Last tasks <span class='text-gray-500 text-2xl'>(3)</span></h2>
+  <div class='grid grid-cols-[1fr_2fr] gap-6'>
+    <app-last-task
+      [progress]='39'
+    />
+    <div class='grid grid-cols-[1fr_1fr] gap-6'>
+      <app-last-task
+        [progress]='90'
+      />
+      <app-last-task
+        [progress]='100'
+      />
+    </div>
   </div>
 </div>
