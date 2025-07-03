@@ -1,13 +1,15 @@
-<div class='bg-purple-100 rounded-3xl h-10 overflow-hidden'>
+<div class='bg-purple-100 rounded-3xl h-10 overflow-hidden relative'>
   <div
     [class]='className()'
     [style.width.%]="progress"
     class='h-10 flex items-center justify-center progress-bar-striped'
   >
-    @if (progress >= 15 && progress < 100) {
-      <p class='text-[var(--text)]'>{{progress}}%</p>
-    } @else if (progress === 100){
-      <p class='text-[var(--text)]'>Done</p>
-    }
   </div>
+  @if (progress === 0) {
+    <p class="text-[var(--text)] absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2">Not Started</p>
+  } @else if (progress >= 15 && progress < 100) {
+    <p class="text-[var(--text)] absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2">{{progress}}%</p>
+  } @else if (progress === 100) {
+    <p class="text-[var(--text)] absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2">Done</p>
+  }
 </div>

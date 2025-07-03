@@ -1,24 +1,26 @@
-<div class='bg-[var(--foreground)] rounded-2xl p-4'>
-  <div class='grid grid-rows-3 gap-5'>
-    <div class='row-span-1 flex items-start justify-between'>
-      <div class='flex gap-4'>
-        <div class='bg-purple-100 rounded-full w-10 h-10 flex items-center justify-center'>
-          <lucide-icon [img]='Plane'></lucide-icon>
+<div class='bg-[var(--foreground)] rounded-2xl p-4 min-h-54 flex flex-col gap-5'>
+    <div class='flex flex-col'>
+      <div class='flex items-start justify-between min-h-12'>
+        <div class='flex gap-4'>
+          <div class='bg-purple-100 rounded-full w-10 h-10 flex items-center justify-center'>
+            <lucide-icon [img]='Plane'></lucide-icon>
+          </div>
+          <p class='w-25 text-[var(--text)]'>{{ title }}</p>
         </div>
-        <p class='w-20 text-[var(--text)]'>Travel App User Flow</p>
+        <div class='flex items-center'>
+          <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
+          <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
+          <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
+        </div>
       </div>
-      <div class='flex items-center'>
-        <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
-        <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
-        <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
-      </div>
+      <div class='text-gray-500 pt-1 pl-2'>Due: {{getDue()}}</div>
     </div>
-    <div class='row-span-1'>
+    <div>
       <app-progress
         [progress]='progress'
       />
     </div>
-    <div class='row-span-1 flex items-center justify-between'>
+    <div class='flex items-center justify-between'>
       <div class='flex items-center gap-3'>
         <p class='flex items-center gap-2 text-[var(--text)] font-light'>
           <lucide-icon [img]='MessageSquareText' class='text-gray-500' size='20' strokeWidth='1.5'></lucide-icon>
@@ -35,9 +37,8 @@
         </p>
       </div>
       <div class='flex items-center gap-2'>
-        <app-add-button />
-        <app-edit-button />
+        <app-add-button/>
+        <app-edit-button/>
       </div>
     </div>
   </div>
-</div>

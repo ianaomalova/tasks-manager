@@ -1,6 +1,6 @@
 <div class="p-7">
-  <div class="grid grid-cols-[1fr_2fr] gap-6 mb-8">
-    <div class="max-h-96 max-w-full">
+  <div class="grid grid-cols-3 gap-6 mb-8">
+    <div class="max-w-full">
       <app-card
         color="bg-[var(--purple-light)]"
         title="Active projects"
@@ -20,21 +20,22 @@
         info="19h 9m"
       />
     </div>
-    <app-statistic />
+    <div class='col-span-2'>
+      <app-statistic />
+    </div>
   </div>
 
-  <h2 class='mb-4 font-medium text-2xl'>Last tasks <span class='text-gray-500 text-2xl'>(3)</span></h2>
-  <div class='grid grid-cols-[1fr_2fr] gap-6'>
-    <app-last-task
-      [progress]='39'
-    />
-    <div class='grid grid-cols-[1fr_1fr] gap-6'>
+  <h2 class='mb-4 font-medium text-2xl text-[var(--text)]'>Last tasks <span class='text-gray-500 text-2xl'>({{tasks.length}})</span></h2>
+  <div class='grid grid-cols-3 gap-6'>
+    @for (task of tasks; track task.id) {
       <app-last-task
-        [progress]='90'
+        [id]='task.id'
+        [title]='task.title'
+        [status]='task.status'
+        [dueDate]='task.dueDate'
+        [users]='task.users'
+        [progress]='task.progress'
       />
-      <app-last-task
-        [progress]='100'
-      />
-    </div>
+    }
   </div>
 </div>

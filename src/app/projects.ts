@@ -1,4 +1,4 @@
-import {IProjectItem} from './models/project-item.interface';
+import {IProjectItem} from './models/ProjectItem';
 
 export const projects: IProjectItem[] = [
   { name: 'Landing page', color: 'bg-yellow-500' },

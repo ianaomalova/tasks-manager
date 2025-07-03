@@ -1,14 +1,9 @@
-.style-1 { background: linear-gradient(135deg, #8B5CF6, #A855F7); }
-.style-2 { background: linear-gradient(135deg, #667eea, #764ba2); }
-.style-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-.style-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
-
 .progress-bar-purple {
   background: linear-gradient(
       -45deg,
-      #8B5CF6 0%,   /* насыщенный фиолетовый */
-      #A78BFA 50%,  /* чуть светлее */
-      #DDD6FE 100%  /* очень светлый лавандовый */
+      #8B5CF6 0%,
+      #A78BFA 50%,
+      #DDD6FE 100%
   );
   border-radius: 30px;
   transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -18,9 +13,9 @@
 .progress-bar-green {
   background: linear-gradient(
       -45deg,
-      #14B8A6 0%,   /* бирюзово-зелёный */
-      #2DD4BF 50%,  /* светлее бирюзовый */
-      #99F6E4 100%  /* нежно-мятный */
+      #14B8A6 0%,
+      #2DD4BF 50%,
+      #99F6E4 100%
   );
   border-radius: 30px;
   transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -30,9 +25,9 @@
 .progress-bar-yellow {
   background: linear-gradient(
       -45deg,
-      #FACC15 0%,   /* сочный жёлтый */
-      #FDE047 50%,  /* лимонный */
-      #FEF9C3 100%  /* светлый пастель */
+      #FACC15 0%,
+      #FDE047 50%,
+      #FEF9C3 100%
   );
   border-radius: 30px;
   transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);

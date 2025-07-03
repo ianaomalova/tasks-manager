@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {LucideAngularModule, Columns2, LayoutDashboardIcon, MessageCircleMore, ChartNoAxesCombined, CalendarRange, Users, ClipboardMinus, Settings, ChevronDown} from 'lucide-angular';
-import {IMenuItem} from '../../../models/menu-item.interface';
+import {IMenuItem} from '../../../models/MenuItem';
 import {projects} from '../../../projects';
 import {NgClass} from '@angular/common';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
