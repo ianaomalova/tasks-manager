@@ -41,7 +41,12 @@
         [dueDate]='task.dueDate'
         [users]='task.users'
         [progress]='task.progress'
+        (onEdit)='openModal($event)'
       />
     }
   </div>
 </div>
+
+<ng-template #textTemplate>
+  <p>Просто текстовое сообщение</p>
+</ng-template>

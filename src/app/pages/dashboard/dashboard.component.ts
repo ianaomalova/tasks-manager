@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, TemplateRef, ViewChild} from '@angular/core';
 import { CardComponent } from './components/card/card.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
 import {LastTaskComponent} from './components/last-task/last-task.component';
@@ -7,6 +7,7 @@ import {Task} from '../../models/Task';
 import {FilterComponent} from './components/filter/filter.component';
 import {SortComponent} from './components/sort/sort.component';
 import {ActiveTab} from './ActiveTab';
+import {ModalService} from '../../core/services/modal.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +18,10 @@ import {ActiveTab} from './ActiveTab';
 export class DashboardComponent {
   protected readonly tasks: Task[] = tasks;
   filteredTasks = tasks;
+  @ViewChild('textTemplate') textTemplate!: TemplateRef<any>;
+
+  constructor(private modalService: ModalService) {
+  }
 
   changeFilter(filter: ActiveTab) {
     if (filter === 'All') {
@@ -32,5 +37,9 @@ export class DashboardComponent {
       const dateB = new Date(b.dueDate).getTime();
       return order === 'asc' ? dateA - dateB : dateB - dateA;
     });
+  }
+
+  openModal(id: number) {
+    this.modalService.open({content: this.textTemplate});
   }
 }

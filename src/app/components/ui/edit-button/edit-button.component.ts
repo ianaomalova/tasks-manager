@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {LucideAngularModule, Pencil} from 'lucide-angular';
 
 @Component({
@@ -11,5 +11,9 @@ import {LucideAngularModule, Pencil} from 'lucide-angular';
 })
 export class EditButtonComponent {
   readonly Pencil = Pencil;
+  @Output() onEdit = new EventEmitter();
 
+  edit() {
+    this.onEdit.emit();
+  }
 }
