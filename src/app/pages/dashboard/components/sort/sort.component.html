@@ -1,0 +1,7 @@
+<div class='bg-purple-100 rounded-full py-2 px-3 mb-4 cursor-pointer' (click)='changeSort()'>
+  @if (sort === 'asc') {
+    <lucide-icon [img]='ArrowUpNarrowWide'></lucide-icon>
+  } @else {
+    <lucide-icon [img]='ArrowDownWideNarrow'></lucide-icon>
+  }
+</div>

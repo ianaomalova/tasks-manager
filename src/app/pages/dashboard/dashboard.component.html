@@ -25,9 +25,15 @@
     </div>
   </div>
 
-  <h2 class='mb-4 font-medium text-2xl text-[var(--text)]'>Last tasks <span class='text-gray-500 text-2xl'>({{tasks.length}})</span></h2>
+  <div class='flex items-center justify-between'>
+    <h2 class='mb-4 font-medium text-2xl text-[var(--text)]'>Last tasks <span class='text-gray-500 text-2xl'>({{filteredTasks.length}})</span></h2>
+    <div class='flex items-center gap-4'>
+      <app-filter (selectedTabChange)='changeFilter($event)'/>
+      <app-sort (onSortChange)='sortChange($event)'/>
+    </div>
+  </div>
   <div class='grid grid-cols-3 gap-6'>
-    @for (task of tasks; track task.id) {
+    @for (task of filteredTasks; track task.id) {
       <app-last-task
         [id]='task.id'
         [title]='task.title'

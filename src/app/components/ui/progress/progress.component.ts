@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-progress',
@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   templateUrl: './progress.component.html',
   styleUrl: './progress.component.scss'
 })
-export class ProgressComponent implements OnInit {
+export class ProgressComponent {
   @Input() progress: number = 0;
 
   className(): string {
@@ -17,9 +17,5 @@ export class ProgressComponent implements OnInit {
     } else {
       return 'progress-bar-green';
     }
-  }
-
-  ngOnInit() {
-    console.log(this.progress);
   }
 }

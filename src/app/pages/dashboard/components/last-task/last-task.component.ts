@@ -28,12 +28,10 @@ export class LastTaskComponent {
   @Input() users!: number[];
   @Input() progress: number = 0;
 
-  currentDate = new Date();
-
   getDue(): number {
     const currentDate = new Date()
     const due = new Date(this.dueDate)
-    const days = currentDate.getTime() - due.getTime();
-    return days > 0 ? days : 0;
+    const days = Math.ceil((+due - +currentDate) / (1000 * 60 * 60 * 24));
+    return days;
   }
 }
