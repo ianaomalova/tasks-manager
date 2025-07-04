@@ -8,17 +8,18 @@ import {FilterComponent} from './components/filter/filter.component';
 import {SortComponent} from './components/sort/sort.component';
 import {ActiveTab} from './ActiveTab';
 import {ModalService} from '../../core/services/modal.service';
+import {EditTaskFormComponent} from './components/edit-task-form/edit-task-form.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CardComponent, StatisticComponent, LastTaskComponent, FilterComponent, SortComponent],
+  imports: [CardComponent, StatisticComponent, LastTaskComponent, FilterComponent, SortComponent, EditTaskFormComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
   protected readonly tasks: Task[] = tasks;
   filteredTasks = tasks;
-  @ViewChild('textTemplate') textTemplate!: TemplateRef<any>;
+  @ViewChild('editTaskForm') editTaskForm!: TemplateRef<any>;
 
   constructor(private modalService: ModalService) {
   }
@@ -39,7 +40,18 @@ export class DashboardComponent {
     });
   }
 
-  openModal(id: number) {
-    this.modalService.open({content: this.textTemplate});
+  updateTask(updatedTask: Task) {
+    const idx = this.tasks.findIndex(t => t.id === updatedTask.id);
+    if (idx > -1) {
+      this.tasks[idx] = updatedTask;
+      this.filteredTasks = [...this.tasks];
+    }
+  }
+
+  openModal(task: Task) {
+    this.modalService.open({
+      content: this.editTaskForm,
+      context: {task}
+    });
   }
 }

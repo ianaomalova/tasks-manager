@@ -5,7 +5,7 @@
           <div class='bg-purple-100 rounded-full w-10 h-10 flex items-center justify-center'>
             <lucide-icon [img]='Plane'></lucide-icon>
           </div>
-          <p class='w-25 text-[var(--text)]'>{{ title }}</p>
+          <p class='w-25 text-[var(--text)]'>{{ task.title }}</p>
         </div>
         <div class='flex items-center'>
           <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
@@ -17,7 +17,7 @@
     </div>
     <div>
       <app-progress
-        [progress]='progress'
+        [progress]='task.progress'
       />
     </div>
     <div class='flex items-center justify-between'>

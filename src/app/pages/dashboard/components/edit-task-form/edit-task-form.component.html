@@ -1,0 +1,38 @@
+<form [formGroup]='form'>
+  <div class='flex items-center justify-center mb-4 gap-3'>
+    <div class='bg-purple-100 p-2 rounded-full'>
+      <lucide-icon [img]='Pencil' size='18'/>
+    </div>
+    <h1 class='text-lg font-bold'>Edit task</h1>
+  </div>
+
+  <div class='mt-5 flex items-center gap-2'>
+    <div class="flex-1 relative">
+      <label class="block text-sm font-medium text-purple-500 mb-1 ml-2">Title</label>
+      <input type="text"
+             class="w-full px-4 py-3 bg-white border rounded-xl shadow-lg transition-all duration-300
+               {{ form.get('title')?.invalid && form.get('title')?.touched ? 'border-red-500 shadow-red-200/50 focus:border-red-500 focus:shadow-red-300/50 bg-red-50' : 'border-purple-200 shadow-purple-200/50 focus:border-purple-500 focus:shadow-purple-300/50' }}"
+             formControlName="title"
+      >
+      @if (form.get('title')?.invalid && form.get('title')?.touched) {
+        <div class="absolute text-red-500 text-sm mt-1 ml-2">Title is required</div>
+      }
+      <div class="h-5"></div>
+    </div>
+    <div class="flex-1 relative">
+      <label class="block text-sm font-medium text-purple-500 mb-1 ml-2">Due date</label>
+      <input type="date"
+             class="w-full px-4 py-3 bg-white border rounded-xl shadow-lg transition-all duration-300
+               {{ form.get('dueDate')?.invalid && form.get('dueDate')?.touched ? 'border-red-500 shadow-red-200/50 focus:border-red-500 focus:shadow-red-300/50 bg-red-50' : 'border-purple-200 shadow-purple-200/50 focus:border-purple-500 focus:shadow-purple-300/50' }}"
+             formControlName="dueDate"
+      >
+      @if (form.get('dueDate')?.invalid && form.get('dueDate')?.touched) {
+        <div class="absolute text-red-500 text-sm mt-1 ml-2">Поле даты обязательно</div>
+      }
+      <div class="h-5"></div>
+    </div>
+  </div>
+  <div class='flex justify-end mt-6'>
+    <button class='bg-purple-200 rounded-lg px-3 py-2 cursor-pointer hover:bg-purple-300' (click)='save()'>Save</button>
+  </div>
+</form>

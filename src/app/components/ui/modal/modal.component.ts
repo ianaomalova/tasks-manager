@@ -12,10 +12,11 @@ import {
   transition,
   animate,
 } from '@angular/animations';
+import {LucideAngularModule, X} from 'lucide-angular';
 
 @Component({
   selector: 'app-modal',
-  imports: [AsyncPipe, NgTemplateOutlet],
+  imports: [AsyncPipe, NgTemplateOutlet, LucideAngularModule],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
   animations: [
@@ -97,4 +98,6 @@ export class ModalComponent {
   close(event?: Event) {
     this.modalService.close();
   }
+
+  protected readonly X = X;
 }

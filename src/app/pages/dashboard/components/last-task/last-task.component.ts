@@ -4,6 +4,7 @@ import {ProgressComponent} from '../../../../components/ui/progress/progress.com
 import {AddButtonComponent} from '../../../../components/ui/add-button/add-button.component';
 import {EditButtonComponent} from '../../../../components/ui/edit-button/edit-button.component';
 import {Status} from '../../../../models/Status';
+import {Task} from '../../../../models/Task';
 
 @Component({
   selector: 'app-last-task',
@@ -22,21 +23,16 @@ export class LastTaskComponent {
   readonly Image = Image;
   readonly SquareArrowOutUpRight = SquareArrowOutUpRight;
 
-  @Input() id!: number;
-  @Input() title!: string;
-  @Input() status!: Status;
-  @Input() dueDate!: string;
-  @Input() users!: number[];
-  @Input() progress: number = 0;
-  @Output() onEdit = new EventEmitter<number>();
+  @Input() task!: Task;
+  @Output() onEdit = new EventEmitter<Task>();
 
   getDue(): number {
     const currentDate = new Date()
-    const due = new Date(this.dueDate)
+    const due = new Date(this.task.dueDate)
     return Math.ceil((+due - +currentDate) / (1000 * 60 * 60 * 24));
   }
 
   edit() {
-    this.onEdit.emit(this.id);
+    this.onEdit.emit(this.task);
   }
 }

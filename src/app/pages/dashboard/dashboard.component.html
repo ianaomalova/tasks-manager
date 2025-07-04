@@ -35,18 +35,17 @@
   <div class='grid grid-cols-3 gap-6'>
     @for (task of filteredTasks; track task.id) {
       <app-last-task
-        [id]='task.id'
-        [title]='task.title'
-        [status]='task.status'
-        [dueDate]='task.dueDate'
-        [users]='task.users'
-        [progress]='task.progress'
+        [task]='task'
         (onEdit)='openModal($event)'
       />
     }
   </div>
 </div>
 
-<ng-template #textTemplate>
-  <p>Просто текстовое сообщение</p>
+<ng-template #editTaskForm let-task="task">
+  <app-edit-task-form
+    [task]='task'
+    (saveTask)='updateTask($event)'
+  />
 </ng-template>
+

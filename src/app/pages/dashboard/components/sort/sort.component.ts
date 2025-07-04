@@ -11,10 +11,11 @@ import {ArrowDownWideNarrow, ArrowUpNarrowWide, LucideAngularModule} from 'lucid
 })
 export class SortComponent {
   @Output() onSortChange = new EventEmitter<'asc' | 'desc'>();
-
+  activeSort: boolean = false;
   sort: 'asc' | 'desc' = 'asc';
 
   changeSort() {
+    this.activeSort = true;
     this.sort = this.sort === 'asc' ? 'desc' : 'asc';
     this.onSortChange.emit(this.sort);
   }
