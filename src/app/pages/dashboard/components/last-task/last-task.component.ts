@@ -29,7 +29,8 @@ export class LastTaskComponent {
   getDue(): number {
     const currentDate = new Date()
     const due = new Date(this.task.dueDate)
-    return Math.ceil((+due - +currentDate) / (1000 * 60 * 60 * 24));
+    const diff = Math.ceil((+due - +currentDate) / (1000 * 60 * 60 * 24));
+    return diff > 0 ? diff : 0;
   }
 
   edit() {

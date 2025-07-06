@@ -23,9 +23,10 @@ export class ModalService {
   }
 
   close() {
-    // this.isOpenModal$.next(false);
     const current = this.configModal$.value;
-    this.configModal$.next(current.slice(0, -1));
+    const updated = current.slice(0, -1);
+    this.configModal$.next(updated);
+    this.isOpenModal$.next(updated.length > 0);
   }
 
   constructor() { }

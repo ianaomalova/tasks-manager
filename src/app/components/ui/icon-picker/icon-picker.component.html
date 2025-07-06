@@ -10,7 +10,7 @@
         (input)='search(searchInput.value)'
         type="text"
         placeholder="Поиск иконок..."
-        class="block w-full pl-10 pr-3 py-2 border border-slate-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/70 backdrop-blur-sm"
+        class="block w-full pl-10 pr-3 py-2 border border-slate-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/70 dark:bg-white backdrop-blur-sm"
       />
     </div>
   </div>
@@ -19,7 +19,7 @@
 <!-- Icons Grid -->
 <div class="max-w-7xl mx-auto">
   @for (category of filteredIcons; track category.categoryKey) {
-    <h3 class='text-xl text-center font-bold text-slate-800 mb-2'>{{ category.categoryName }}</h3>
+    <h3 class='text-xl text-center font-bold text-slate-800 mb-2 dark:text-white'>{{ category.categoryName }}</h3>
     <div class='flex items-center flex-wrap justify-center gap-3 mb-8'>
       @for (iconEntry of category.icons; track iconEntry.name) {
         <div

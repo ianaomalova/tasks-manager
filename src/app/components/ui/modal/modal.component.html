@@ -22,10 +22,10 @@
           <div
             (click)="$event.stopPropagation()"
             [@dialogAnimation]="(isOpen$ | async) ? 'open' : 'closed'"
-            class="relative transform overflow-hidden rounded-lg bg-white text-left px-6 py-6 shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+            class="relative transform overflow-hidden rounded-lg bg-[var(--foreground)] text-left px-6 py-6 shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
           >
             <div class='flex justify-end'>
-              <button class='cursor-pointer text-gray-600' (click)='close()'>
+              <button class='cursor-pointer text-gray-600 dark:text-white' (click)='close()'>
                 <lucide-icon [img]='X'/>
               </button>
             </div>

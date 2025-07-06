@@ -1,11 +1,28 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {Task} from '../../../../models/Task';
 import {LucideAngularModule, LucideIconData, Pencil, Plane} from 'lucide-angular';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule, ValidationErrors,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 import {ModalService} from '../../../../core/services/modal.service';
 import {IconPickerComponent} from '../../../../components/ui/icon-picker/icon-picker.component';
 import {getIconByName} from '../../../../utils/icon.utils';
 
+export function minDateValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const selectedDate = new Date(control.value);
+
+    return selectedDate < today ? {pastDate: true} : null
+  }
+}
 
 @Component({
   selector: 'app-edit-task-form',
@@ -39,7 +56,7 @@ export class EditTaskFormComponent implements OnInit {
   initForm() {
     this.form = this.formBuilder.group({
       title: [this.task.title, Validators.required],
-      dueDate: [this.task.dueDate, Validators.required],
+      dueDate: [this.task.dueDate, [Validators.required, minDateValidator()]],
       icon: [this.task.icon || 'plane', Validators.required],
     })
 

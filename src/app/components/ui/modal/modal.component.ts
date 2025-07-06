@@ -21,70 +21,22 @@ import { LucideAngularModule, X } from 'lucide-angular';
   styleUrl: './modal.component.scss',
   animations: [
     trigger('dialogAnimation', [
-      state(
-        'open',
-        style({
-          opacity: 1,
-          transform: 'translateY(0) scale(1)',
-        })
-      ),
-      state(
-        'closed',
-        style({
-          opacity: 0,
-          transform: 'translateY(1rem) scale(0.95)',
-        })
-      ),
+      state('open', style({ opacity: 1, transform: 'translateY(0) scale(1)' })),
+      state('closed', style({ opacity: 0, transform: 'translateY(1rem) scale(0.95)' })),
       transition('closed => open', [animate('300ms ease-out')]),
-      transition('open => closed', [animate('200ms ease-in')]),
+      transition('open => closed', [animate('300ms ease-in')]),
     ]),
     trigger('backdropAnimation', [
-      state(
-        'open',
-        style({
-          opacity: 1,
-        })
-      ),
-      state(
-        'closed',
-        style({
-          opacity: 0,
-        })
-      ),
+      state('open', style({ opacity: 1 })),
+      state('closed', style({ opacity: 0 })),
       transition('closed => open', [animate('300ms ease-out')]),
-      transition('open => closed', [animate('10ms ease-in')]),
+      transition('open => closed', [animate('300ms ease-in')]),
     ]),
     trigger('modalAnimation', [
-      state(
-        'open',
-        style({
-          visibility: 'visible',
-          'pointer-events': 'auto',
-        })
-      ),
-      state(
-        'closed',
-        style({
-          visibility: 'hidden',
-          'pointer-events': 'none',
-        })
-      ),
-      transition('open => closed', [
-        animate(
-          '10ms ease-in',
-          style({
-            visibility: 'hidden',
-            'pointer-events': 'none',
-          })
-        ),
-      ]),
-      transition('closed => open', [
-        style({
-          visibility: 'visible',
-          'pointer-events': 'auto',
-        }),
-        animate('0ms'),
-      ]),
+      state('open', style({ visibility: 'visible', 'pointer-events': 'auto' })),
+      state('closed', style({ visibility: 'hidden', 'pointer-events': 'none' })),
+      transition('open => closed', [animate('300ms ease-in')]),
+      transition('closed => open', [animate('300ms ease-out')]),
     ]),
   ],
 })
