@@ -44,3 +44,13 @@ export function getCategorizedIcons(): CategorizedIcons[] {
       })),
   }));
 }
+
+export function filterCategorizedIcons(searchQuery: string): CategorizedIcons[] {
+  const queryLower = searchQuery.toLowerCase();
+  return getCategorizedIcons()
+    .map(category => ({
+      ...category,
+      icons: category.icons.filter(icon => icon.name.toLowerCase().includes(queryLower)),
+    }))
+    .filter(category => category.icons.length > 0);
+}

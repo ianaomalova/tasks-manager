@@ -1,40 +1,42 @@
-<div
-  (click)="close()"
-  [@modalAnimation]="(isOpen$ | async) ? 'open' : 'closed'"
-  class="modal-container"
->
+@for (modal of configModal$ | async; track $index) {
   <div
-    class="relative z-10"
-    aria-labelledby="dialog-title"
-    role="dialog"
-    aria-modal="true"
+    (click)="close()"
+    [@modalAnimation]="(isOpen$ | async) ? 'open' : 'closed'"
+    class="modal-container"
   >
     <div
-      class="fixed inset-0 bg-gray-500/75 transition-opacity"
-      [@backdropAnimation]="(isOpen$ | async) ? 'open' : 'closed'"
-      aria-hidden="true"
-    ></div>
-    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+      class="relative z-10"
+      aria-labelledby="dialog-title"
+      role="dialog"
+      aria-modal="true"
+    >
       <div
-        class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
-      >
+        class="fixed inset-0 bg-gray-500/75 transition-opacity"
+        [@backdropAnimation]="(isOpen$ | async) ? 'open' : 'closed'"
+        aria-hidden="true"
+      ></div>
+      <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
         <div
-          (click)="$event.stopPropagation()"
-          [@dialogAnimation]="(isOpen$ | async) ? 'open' : 'closed'"
-          class="relative transform overflow-hidden rounded-lg bg-white text-left px-6 py-6 shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+          class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
         >
-          <div class='flex justify-end'>
-            <button class='cursor-pointer text-gray-600' (click)='close()'>
-              <lucide-icon [img]='X'/>
-            </button>
-          </div>
-          <div>
-            @if (configModal$ | async; as config) {
-              <ng-container *ngTemplateOutlet="config.content; context: config.context"></ng-container>
-            }
+          <div
+            (click)="$event.stopPropagation()"
+            [@dialogAnimation]="(isOpen$ | async) ? 'open' : 'closed'"
+            class="relative transform overflow-hidden rounded-lg bg-white text-left px-6 py-6 shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+          >
+            <div class='flex justify-end'>
+              <button class='cursor-pointer text-gray-600' (click)='close()'>
+                <lucide-icon [img]='X'/>
+              </button>
+            </div>
+            <div>
+              @if (modal; as config) {
+                <ng-container *ngTemplateOutlet="config.content; context: config.context"></ng-container>
+              }
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+}

@@ -90,14 +90,14 @@ import { LucideAngularModule, X } from 'lucide-angular';
 })
 export class ModalComponent {
   isOpen$: Observable<boolean>;
-  configModal$: Observable<ModalConfig | null>;
+  configModal$: Observable<ModalConfig[]>;
 
   constructor(private modalService: ModalService) {
     this.isOpen$ = this.modalService.isOpen$;
     this.configModal$ = this.modalService.config$;
   }
 
-  close(event?: Event) {
+  close() {
     this.modalService.close();
   }
 

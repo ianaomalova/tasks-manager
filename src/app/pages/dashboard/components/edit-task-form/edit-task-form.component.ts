@@ -21,7 +21,7 @@ import {getIconByName} from '../../../../utils/icon.utils';
 export class EditTaskFormComponent implements OnInit {
   @Input() task!: Task;
   @Output() saveTask = new EventEmitter<Task>();
-  @ViewChild('editIcon') editIcon!: TemplateRef<any>;
+  @ViewChild('iconPicker') iconPicker!: TemplateRef<any>;
   form!: FormGroup;
   isIconsVisible = false;
   selectedIcon: LucideIconData | undefined = Plane;
@@ -61,6 +61,9 @@ export class EditTaskFormComponent implements OnInit {
 
   openIcons() {
     this.isIconsVisible = !this.isIconsVisible;
+    this.modalService.open({
+      content: this.iconPicker
+    })
   }
 
   iconChange(icon: string) {

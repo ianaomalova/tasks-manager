@@ -11,19 +11,21 @@ export interface ModalConfig {
 })
 export class ModalService {
   private isOpenModal$ = new BehaviorSubject<boolean>(false);
-  private configModal$ = new BehaviorSubject<ModalConfig | null>(null);
+  private configModal$ = new BehaviorSubject<ModalConfig[] | []>([]);
 
   isOpen$ = this.isOpenModal$.asObservable();
   config$ = this.configModal$.asObservable();
 
   open(config: ModalConfig) {
-    this.configModal$.next(config);
+    const current = this.configModal$.value;
+    this.configModal$.next([...current, config]);
     this.isOpenModal$.next(true);
   }
 
   close() {
-    this.isOpenModal$.next(false);
-    this.configModal$.next(null);
+    // this.isOpenModal$.next(false);
+    const current = this.configModal$.value;
+    this.configModal$.next(current.slice(0, -1));
   }
 
   constructor() { }
