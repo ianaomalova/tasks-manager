@@ -1,9 +1,8 @@
 import {Status} from './Status';
-import {LucideIconData} from 'lucide-angular';
 
 export interface Task {
   id: number;
-  icon: any;
+  icon: string;
   title: string,
   status: Status,
   progress: number,

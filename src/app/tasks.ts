@@ -1,7 +1,7 @@
 import { Task } from './models/Task';
 
 export const tasks: Task[] = [
-  { id: 1, icon: 'Plane', title: "Design Main Page", status: "In Progress", progress: 60, dueDate: "2025-07-15", users: [101, 102] },
+  { id: 1, icon: 'star', title: "Design Main Page", status: "In Progress", progress: 60, dueDate: "2025-07-15", users: [101, 102] },
   { id: 2, icon: 'Plane', title: "Setup DB", status: "In Progress", progress: 39, dueDate: "2025-07-20", users: [103, 104] },
   { id: 3, icon: 'Plane', title: "Build Auth API", status: "Completed", progress: 100, dueDate: "2025-07-10", users: [105, 106] },
   { id: 4, icon: 'Plane', title: "Test UI", status: "In Progress", progress: 30, dueDate: "2025-07-18", users: [107, 108] },

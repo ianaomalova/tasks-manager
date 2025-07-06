@@ -3,7 +3,7 @@
       <div class='flex items-start justify-between min-h-12'>
         <div class='flex gap-4'>
           <div class='bg-purple-100 rounded-full w-10 h-10 flex items-center justify-center'>
-            <lucide-icon [img]='Plane'></lucide-icon>
+            <lucide-icon [img]='getIconByName(task.icon)'></lucide-icon>
           </div>
           <p class='w-25 text-[var(--text)]'>{{ task.title }}</p>
         </div>

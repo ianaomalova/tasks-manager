@@ -31,8 +31,15 @@
       <div class="h-5"></div>
     </div>
   </div>
+  <div class='mt-1 flex items-center gap-3'>
+    <p class="text-sm font-medium text-purple-500">Current icon:</p>
+    <div class="cursor-pointer bg-white p-3 rounded-xl border border-purple-200 shadow-lg shadow-purple-200/50 transition-all duration-300 hover:border-purple-300 hover:shadow-purple-300/50"
+         (click)='openIcons()'
+    >
+      <lucide-icon [img]='selectedIcon' size='18' class="text-purple-600"/>
+    </div>
+  </div>
   <div class='flex justify-end mt-6'>
-    <button class='bg-purple-200 rounded-lg px-3 py-2 cursor-pointer hover:bg-purple-300 mr-5' (click)='openIcons()'>Select Icon</button>
     <button class='bg-purple-200 rounded-lg px-3 py-2 cursor-pointer hover:bg-purple-300' (click)='save()'>Save</button>
   </div>
 

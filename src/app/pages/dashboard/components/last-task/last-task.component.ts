@@ -4,6 +4,7 @@ import {ProgressComponent} from '../../../../components/ui/progress/progress.com
 import {AddButtonComponent} from '../../../../components/ui/add-button/add-button.component';
 import {EditButtonComponent} from '../../../../components/ui/edit-button/edit-button.component';
 import {Task} from '../../../../models/Task';
+import {getIconByName} from '../../../../utils/icon.utils';
 
 @Component({
   selector: 'app-last-task',
@@ -34,4 +35,6 @@ export class LastTaskComponent {
   edit() {
     this.onEdit.emit(this.task);
   }
+
+  protected readonly getIconByName = getIconByName;
 }

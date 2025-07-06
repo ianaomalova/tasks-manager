@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {Task} from '../../../../models/Task';
-import {LucideAngularModule, Pencil} from 'lucide-angular';
+import {LucideAngularModule, LucideIconData, Pencil, Plane} from 'lucide-angular';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ModalService} from '../../../../core/services/modal.service';
 import {IconPickerComponent} from '../../../../components/ui/icon-picker/icon-picker.component';
+import {getIconByName} from '../../../../utils/icon.utils';
 
 
 @Component({
@@ -23,9 +24,10 @@ export class EditTaskFormComponent implements OnInit {
   @ViewChild('editIcon') editIcon!: TemplateRef<any>;
   form!: FormGroup;
   isIconsVisible = false;
-  selectedIcon: any;
+  selectedIcon: LucideIconData | undefined = Plane;
 
   protected readonly Pencil = Pencil;
+  protected readonly Plane = Plane;
 
   constructor(private formBuilder: FormBuilder, private modalService: ModalService) {
 
@@ -38,8 +40,10 @@ export class EditTaskFormComponent implements OnInit {
     this.form = this.formBuilder.group({
       title: [this.task.title, Validators.required],
       dueDate: [this.task.dueDate, Validators.required],
-      icon: [this.task.icon, Validators.required],
+      icon: [this.task.icon || 'plane', Validators.required],
     })
+
+    this.selectedIcon = getIconByName(this.task.icon);
   }
 
   save() {
@@ -59,8 +63,8 @@ export class EditTaskFormComponent implements OnInit {
     this.isIconsVisible = !this.isIconsVisible;
   }
 
-  iconChange(icon: any) {
-    this.selectedIcon = icon;
-    console.log(icon);
+  iconChange(icon: string) {
+    this.form.controls['icon'].setValue(icon);
+    this.selectedIcon = getIconByName(icon);
   }
 }

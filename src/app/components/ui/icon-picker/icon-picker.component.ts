@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { LucideAngularModule, icons, Search } from 'lucide-angular';
-import {iconCategories} from '../../../configs/icon-categories.config';
+import {LucideAngularModule, Search} from 'lucide-angular';
+import {CategorizedIcons, getCategorizedIcons} from '../../../utils/icon.utils';
 
 @Component({
   selector: 'app-icon-picker',
@@ -13,30 +13,15 @@ import {iconCategories} from '../../../configs/icon-categories.config';
 
 export class IconPickerComponent implements OnInit {
   searchQuery = '';
-  selectedIcon = '';
-  selectedCategory = '';
-  protected readonly iconCategories = iconCategories;
+  categorizedIcons: CategorizedIcons[] = [];
   protected readonly Search = Search;
-  @Output() iconChange = new EventEmitter<any>();
+  @Output() iconChange = new EventEmitter<string>();
 
   ngOnInit() {
+    this.categorizedIcons = getCategorizedIcons();
   }
 
-  categorizedIcons = Object.entries(this.iconCategories).map(([key, category]) => ({
-    categoryKey: key,
-    categoryName: category.name,
-    icons: Object.entries(icons)
-      .filter(([name]) => {
-        const iconName = name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
-        return category.icons.includes(iconName);
-      })
-      .map(([name, icon]) => ({
-        name: name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase(),
-        icon
-      }))
-  }));
-
-  selectIcon(icon: any) {
+  selectIcon(icon: string) {
     this.iconChange.emit(icon);
   }
 }
