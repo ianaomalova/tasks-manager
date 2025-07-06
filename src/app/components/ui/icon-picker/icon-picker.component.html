@@ -1,0 +1,48 @@
+<div class="max-w-7xl mx-auto mb-8">
+  <!-- Search Bar -->
+  <div class="mt-8 max-w-md mx-auto">
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <lucide-icon [img]="Search" class="h-5 w-5 z-50 text-slate-400"></lucide-icon>
+      </div>
+      <input
+        type="text"
+        placeholder="Поиск иконок..."
+        class="block w-full pl-10 pr-3 py-3 border border-slate-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/70 backdrop-blur-sm"
+      />
+    </div>
+  </div>
+</div>
+
+<!-- Icons Grid -->
+<div class="max-w-7xl mx-auto">
+  @for (category of categorizedIcons; track category.categoryKey) {
+    <h3 class='text-xl text-center font-bold text-slate-800 mb-2'>{{ category.categoryName }}</h3>
+    <div class='flex items-center flex-wrap justify-center gap-3 mb-8'>
+      @for (iconEntry of category.icons; track iconEntry.name) {
+        <div
+          class='w-10 h-10 bg-purple-100 p-2 flex items-center justify-center rounded-2xl cursor-pointer hover:from-pink-200 hover:to-purple-300 hover:shadow-lg hover:scale-110 hover:-translate-y-1
+         transition-all duration-300 ease-out'
+          (click)='selectIcon(iconEntry.icon)'
+        >
+          <lucide-icon [img]="iconEntry.icon" size="22"></lucide-icon>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- No Results -->
+<!--  <div class="text-center py-16">-->
+<!--    <div class="max-w-sm mx-auto">-->
+<!--      <div class="mb-4">-->
+<!--        <lucide-icon name="search-x" class="h-16 w-16 text-slate-400 mx-auto"></lucide-icon>-->
+<!--      </div>-->
+<!--      <h3 class="text-lg font-medium text-slate-600 mb-2">-->
+<!--        Иконки не найдены-->
+<!--      </h3>-->
+<!--      <p class="text-slate-500">-->
+<!--        Попробуйте изменить запрос поиска-->
+<!--      </p>-->
+<!--    </div>-->
+<!--  </div>-->
+</div>

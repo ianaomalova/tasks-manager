@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {Task} from '../../../../models/Task';
 import {LucideAngularModule, Pencil} from 'lucide-angular';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ModalService} from '../../../../core/services/modal.service';
+import {IconPickerComponent} from '../../../../components/ui/icon-picker/icon-picker.component';
 
 
 @Component({
@@ -10,7 +11,8 @@ import {ModalService} from '../../../../core/services/modal.service';
   imports: [
     LucideAngularModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IconPickerComponent,
   ],
   templateUrl: './edit-task-form.component.html',
   styleUrl: './edit-task-form.component.scss',
@@ -18,7 +20,11 @@ import {ModalService} from '../../../../core/services/modal.service';
 export class EditTaskFormComponent implements OnInit {
   @Input() task!: Task;
   @Output() saveTask = new EventEmitter<Task>();
+  @ViewChild('editIcon') editIcon!: TemplateRef<any>;
   form!: FormGroup;
+  isIconsVisible = false;
+  selectedIcon: any;
+
   protected readonly Pencil = Pencil;
 
   constructor(private formBuilder: FormBuilder, private modalService: ModalService) {
@@ -32,6 +38,7 @@ export class EditTaskFormComponent implements OnInit {
     this.form = this.formBuilder.group({
       title: [this.task.title, Validators.required],
       dueDate: [this.task.dueDate, Validators.required],
+      icon: [this.task.icon, Validators.required],
     })
   }
 
@@ -46,5 +53,14 @@ export class EditTaskFormComponent implements OnInit {
     } else {
       this.form.markAllAsTouched();
     }
+  }
+
+  openIcons() {
+    this.isIconsVisible = !this.isIconsVisible;
+  }
+
+  iconChange(icon: any) {
+    this.selectedIcon = icon;
+    console.log(icon);
   }
 }

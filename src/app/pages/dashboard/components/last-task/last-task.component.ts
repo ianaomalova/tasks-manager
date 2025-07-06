@@ -3,7 +3,6 @@ import {Image, LucideAngularModule, MessageSquareText, Plane, SquareArrowOutUpRi
 import {ProgressComponent} from '../../../../components/ui/progress/progress.component';
 import {AddButtonComponent} from '../../../../components/ui/add-button/add-button.component';
 import {EditButtonComponent} from '../../../../components/ui/edit-button/edit-button.component';
-import {Status} from '../../../../models/Status';
 import {Task} from '../../../../models/Task';
 
 @Component({

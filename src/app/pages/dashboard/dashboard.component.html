@@ -45,7 +45,6 @@
 <ng-template #editTaskForm let-task="task">
   <app-edit-task-form
     [task]='task'
-    (saveTask)='updateTask($event)'
+    (saveTask)="updateTask($event)"
   />
 </ng-template>
-

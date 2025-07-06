@@ -4,7 +4,7 @@ import {
   ModalService,
 } from '../../../core/services/modal.service';
 import { Observable } from 'rxjs';
-import {AsyncPipe, NgTemplateOutlet} from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
   trigger,
   state,
@@ -12,7 +12,7 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import {LucideAngularModule, X} from 'lucide-angular';
+import { LucideAngularModule, X } from 'lucide-angular';
 
 @Component({
   selector: 'app-modal',
@@ -54,7 +54,6 @@ import {LucideAngularModule, X} from 'lucide-angular';
       transition('closed => open', [animate('300ms ease-out')]),
       transition('open => closed', [animate('10ms ease-in')]),
     ]),
-    // Добавляем анимацию для всего контейнера
     trigger('modalAnimation', [
       state(
         'open',
@@ -71,17 +70,20 @@ import {LucideAngularModule, X} from 'lucide-angular';
         })
       ),
       transition('open => closed', [
-        animate('10ms ease-in', style({
-          visibility: 'hidden',
-          'pointer-events': 'none'
-        }))
+        animate(
+          '10ms ease-in',
+          style({
+            visibility: 'hidden',
+            'pointer-events': 'none',
+          })
+        ),
       ]),
       transition('closed => open', [
         style({
           visibility: 'visible',
-          'pointer-events': 'auto'
+          'pointer-events': 'auto',
         }),
-        animate('0ms')
+        animate('0ms'),
       ]),
     ]),
   ],
