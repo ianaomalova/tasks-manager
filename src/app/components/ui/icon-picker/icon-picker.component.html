@@ -7,7 +7,7 @@
         (input)='search(searchInput.value)'
         type="text"
         placeholder="Поиск иконок..."
-        class="block w-full pl-10 pr-3 py-2 border border-slate-300 rounded-xl shadow-sm focus:outline-none focus:ring-1 focus:ring-purple-200 focus:border-transparent bg-white/70 dark:bg-white backdrop-blur-sm"
+        class="placeholder:text-black block w-full pl-10 pr-3 py-2 border border-slate-300 rounded-xl shadow-sm focus:outline-none focus:ring-1 focus:ring-purple-200 focus:border-transparent bg-white/70 dark:bg-white backdrop-blur-sm"
       />
       <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
         <lucide-icon [img]="Search" class="h-5 w-5 text-slate-400"></lucide-icon>
@@ -19,7 +19,7 @@
 <!-- Icons Grid -->
 <div class="max-w-7xl mx-auto">
   @for (category of filteredIcons; track category.categoryKey) {
-    <h3 class='text-lg text-center font-bold text-slate-800 mb-2'>{{ category.categoryName }}</h3>
+    <h3 class='text-lg text-center font-bold text-[var(--text)] mb-2'>{{ category.categoryName }}</h3>
     <div class='flex items-center flex-wrap justify-center gap-3 mb-8'>
       @for (iconEntry of category.icons; track iconEntry.name) {
         <div
@@ -27,7 +27,7 @@
          transition-all duration-300 ease-out'
           (click)='selectIcon(iconEntry.name)'
         >
-          <lucide-icon [img]="iconEntry.icon" size="20" strokeWidth='2'></lucide-icon>
+          <lucide-icon [img]="iconEntry.icon" size="20" strokeWidth='2' class='text-black'></lucide-icon>
         </div>
       }
     </div>
