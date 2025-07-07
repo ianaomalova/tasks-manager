@@ -1,10 +1,12 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {ArrowDownWideNarrow, ArrowUpNarrowWide, LucideAngularModule} from 'lucide-angular';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-sort',
   imports: [
-    LucideAngularModule
+    LucideAngularModule,
+    NgClass
   ],
   templateUrl: './sort.component.html',
   styleUrl: './sort.component.scss'

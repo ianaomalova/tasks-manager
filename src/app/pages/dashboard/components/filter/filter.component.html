@@ -9,16 +9,20 @@
   >
     All
   </button>
-  <button
-    class="cursor-pointer text-sm py-1 px-3 rounded-4xl transition-all duration-200 ease-in-out"
-    [ngClass]="{
+    <button
+      class="cursor-pointer text-sm py-1 px-3 rounded-4xl transition-all duration-200 ease-in-out"
+      [ngClass]="{
       'bg-white text-gray-800 shadow-md scale-105': selectedTab === 'Completed',
       'hover:bg-purple-200 hover:scale-100': selectedTab !== 'Completed'
     }"
-    (click)="changeTab('Completed')"
-  >
-    Completed
-  </button>
+      (click)="changeTab('Completed')"
+    >
+      <div class='flex items-center gap-2'>
+        <i class="pi pi-check"></i>
+        <span>Completed</span>
+      </div>
+    </button>
+
   <button
     class="cursor-pointer text-sm py-1 px-3 rounded-4xl transition-all duration-200 ease-in-out"
     [ngClass]="{
@@ -27,7 +31,10 @@
     }"
     (click)="changeTab('In Progress')"
   >
-    In Progress
+    <div class='flex items-center gap-2'>
+      <i class="pi pi-spinner-dotted"></i>
+      <span>In Progress</span>
+    </div>
   </button>
   <button
     class="cursor-pointer text-sm py-1 px-3 rounded-4xl transition-all duration-200 ease-in-out"
@@ -37,6 +44,9 @@
     }"
     (click)="changeTab('Not Started')"
   >
-    Not Started
+    <div class='flex items-center gap-2'>
+      <i class="pi pi-times"></i>
+      <span>Not started</span>
+    </div>
   </button>
 </div>

@@ -7,10 +7,13 @@
         </div>
         <p class='w-25 text-[var(--text)]'>{{ task.title }}</p>
       </div>
-      <div class='flex items-center'>
-        <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
-        <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
-        <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
+      <div class="card flex justify-center">
+        <p-avatar-group>
+          <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" size="normal" shape="circle" />
+          <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" size="normal" shape="circle" />
+          <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/onyamalimba.png" size="normal" shape="circle" />
+          <p-avatar label="+2" shape="circle" size="normal" />
+        </p-avatar-group>
       </div>
     </div>
     <div class='text-gray-500 pt-1 pl-2'>Due: {{ getDue() }}</div>

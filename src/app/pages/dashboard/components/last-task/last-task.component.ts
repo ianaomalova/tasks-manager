@@ -5,6 +5,8 @@ import {AddButtonComponent} from '../../../../components/ui/add-button/add-butto
 import {EditButtonComponent} from '../../../../components/ui/edit-button/edit-button.component';
 import {Task} from '../../../../models/Task';
 import {getIconByName} from '../../../../utils/icon.utils';
+import {Avatar} from 'primeng/avatar';
+import {AvatarGroup} from 'primeng/avatargroup';
 
 @Component({
   selector: 'app-last-task',
@@ -13,6 +15,8 @@ import {getIconByName} from '../../../../utils/icon.utils';
     ProgressComponent,
     AddButtonComponent,
     EditButtonComponent,
+    Avatar,
+    AvatarGroup,
   ],
   templateUrl: './last-task.component.html',
   styleUrl: './last-task.component.scss'
