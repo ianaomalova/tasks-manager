@@ -13,6 +13,12 @@ import {
 import {ModalService} from '../../../../core/services/modal.service';
 import {IconPickerComponent} from '../../../../components/ui/icon-picker/icon-picker.component';
 import {getIconByName} from '../../../../utils/icon.utils';
+import {Dialog} from 'primeng/dialog';
+import {InputText} from 'primeng/inputtext';
+import {Message} from 'primeng/message';
+import { DatePicker } from 'primeng/datepicker';
+import {Popover} from 'primeng/popover';
+import {OverlayPanel} from 'primeng/overlaypanel';
 
 export function minDateValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -31,17 +37,27 @@ export function minDateValidator(): ValidatorFn {
     FormsModule,
     ReactiveFormsModule,
     IconPickerComponent,
+    Dialog,
+    InputText,
+    Message,
+    DatePicker,
+    Popover,
   ],
   templateUrl: './edit-task-form.component.html',
   styleUrl: './edit-task-form.component.scss',
 })
 export class EditTaskFormComponent implements OnInit {
   @Input() task!: Task;
+  @Input() visible = false;
   @Output() saveTask = new EventEmitter<Task>();
+  @Output() cancel = new EventEmitter<void>();
   @ViewChild('iconPicker') iconPicker!: TemplateRef<any>;
+  @ViewChild('op') overlayPanel!: OverlayPanel;
   form!: FormGroup;
   isIconsVisible = false;
   selectedIcon: LucideIconData | undefined = Plane;
+  formSubmitted = false;
+
 
   protected readonly Pencil = Pencil;
   protected readonly Plane = Plane;
@@ -56,7 +72,7 @@ export class EditTaskFormComponent implements OnInit {
   initForm() {
     this.form = this.formBuilder.group({
       title: [this.task.title, Validators.required],
-      dueDate: [this.task.dueDate, [Validators.required, minDateValidator()]],
+      dueDate: [new Date(this.task.dueDate), [Validators.required, minDateValidator()]],
       icon: [this.task.icon || 'plane', Validators.required],
     })
 
@@ -65,26 +81,27 @@ export class EditTaskFormComponent implements OnInit {
 
   save() {
     if (this.form.valid) {
+      this.formSubmitted = false;
       const updatedTask: Task = {
         ...this.task,
         ...this.form.value
       };
-      this.modalService.close();
+      this.visible = false;
       this.saveTask.emit(updatedTask);
     } else {
+      this.formSubmitted = true;
       this.form.markAllAsTouched();
     }
-  }
-
-  openIcons() {
-    this.isIconsVisible = !this.isIconsVisible;
-    this.modalService.open({
-      content: this.iconPicker
-    })
   }
 
   iconChange(icon: string) {
     this.form.controls['icon'].setValue(icon);
     this.selectedIcon = getIconByName(icon);
+    this.overlayPanel.hide();
+  }
+
+  onDialogClose() {
+    this.visible = false;
+    this.cancel.emit();
   }
 }

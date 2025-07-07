@@ -12,7 +12,7 @@ import {getIconByName} from '../../../../utils/icon.utils';
     LucideAngularModule,
     ProgressComponent,
     AddButtonComponent,
-    EditButtonComponent
+    EditButtonComponent,
   ],
   templateUrl: './last-task.component.html',
   styleUrl: './last-task.component.scss'
@@ -25,6 +25,8 @@ export class LastTaskComponent {
 
   @Input() task!: Task;
   @Output() onEdit = new EventEmitter<Task>();
+
+  visible: boolean = false;
 
   getDue(): number {
     const currentDate = new Date()

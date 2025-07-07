@@ -1,44 +1,44 @@
 <div class='bg-[var(--foreground)] rounded-2xl p-4 min-h-54 flex flex-col gap-4'>
-    <div class='flex flex-col'>
-      <div class='flex items-start justify-between min-h-12'>
-        <div class='flex gap-4'>
-          <div class='bg-purple-100 rounded-full w-10 h-10 flex items-center justify-center'>
-            <lucide-icon [img]='getIconByName(task.icon)'></lucide-icon>
-          </div>
-          <p class='w-25 text-[var(--text)]'>{{ task.title }}</p>
+  <div class='flex flex-col'>
+    <div class='flex items-start justify-between min-h-12'>
+      <div class='flex gap-4'>
+        <div class='bg-purple-100 rounded-full w-10 h-10 flex items-center justify-center text-black'>
+          <lucide-icon [img]='getIconByName(task.icon)'></lucide-icon>
         </div>
-        <div class='flex items-center'>
-          <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
-          <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
-          <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
-        </div>
+        <p class='w-25 text-[var(--text)]'>{{ task.title }}</p>
       </div>
-      <div class='text-gray-500 pt-1 pl-2'>Due: {{getDue()}}</div>
+      <div class='flex items-center'>
+        <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
+        <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
+        <div class='bg-purple-400 rounded-full w-9 h-9 border-2 border-white mr-[-10px]'></div>
+      </div>
     </div>
-    <div>
-      <app-progress
-        [progress]='task.progress'
-      />
+    <div class='text-gray-500 pt-1 pl-2'>Due: {{ getDue() }}</div>
+  </div>
+  <div>
+    <app-progress
+      [progress]='task.progress'
+    />
+  </div>
+  <div class='flex items-center justify-between'>
+    <div class='flex items-center gap-3'>
+      <p class='flex items-center gap-2 text-[var(--text)] font-light'>
+        <lucide-icon [img]='MessageSquareText' class='text-gray-500' size='20' strokeWidth='1.5'></lucide-icon>
+        3
+      </p>
+      <p class='flex items-center gap-2 text-[var(--text)] font-light'>
+        <lucide-icon
+          [img]='Image' class='text-gray-500' size='20' strokeWidth='1.5'></lucide-icon>
+        6
+      </p>
+      <p class='flex items-center gap-2 text-[var(--text)] font-light'>
+        <lucide-icon [img]='SquareArrowOutUpRight' class='text-gray-500' size='20' strokeWidth='1.5'></lucide-icon>
+        5
+      </p>
     </div>
-    <div class='flex items-center justify-between'>
-      <div class='flex items-center gap-3'>
-        <p class='flex items-center gap-2 text-[var(--text)] font-light'>
-          <lucide-icon [img]='MessageSquareText' class='text-gray-500' size='20' strokeWidth='1.5'></lucide-icon>
-          3
-        </p>
-        <p class='flex items-center gap-2 text-[var(--text)] font-light'>
-          <lucide-icon
-            [img]='Image' class='text-gray-500' size='20' strokeWidth='1.5'></lucide-icon>
-          6
-        </p>
-        <p class='flex items-center gap-2 text-[var(--text)] font-light'>
-          <lucide-icon [img]='SquareArrowOutUpRight' class='text-gray-500' size='20' strokeWidth='1.5'></lucide-icon>
-          5
-        </p>
-      </div>
-      <div class='flex items-center gap-2'>
-        <app-add-button/>
-        <app-edit-button (onEdit)='edit()'/>
-      </div>
+    <div class='flex items-center gap-2'>
+      <app-add-button/>
+      <app-edit-button (onEdit)='edit()'/>
     </div>
   </div>
+</div>

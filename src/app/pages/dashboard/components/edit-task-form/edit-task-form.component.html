@@ -1,54 +1,71 @@
-<form [formGroup]='form'>
-  <div class='flex items-center justify-center mb-4 gap-3'>
-    <div class='bg-purple-100 p-2 rounded-full'>
-      <lucide-icon [img]='Pencil' size='18'/>
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '30rem' }"
+  (onHide)="onDialogClose()"
+>
+  <ng-template #header>
+    <div class="inline-flex items-center justify-center gap-2">
+      <lucide-icon [img]='Pencil' size='20' strokeWidth='2.5'/>
+      <span class="font-bold text-xl whitespace-nowrap">Edit task</span>
     </div>
-    <h1 class='text-lg font-bold text-[var(--text)] '>Edit task</h1>
-  </div>
-  <div class='mt-5 flex items-center gap-2'>
-    <div class="flex-1 relative">
-      <label class="block text-sm font-medium text-purple-500 mb-1 ml-2 dark:text-purple-300">Title</label>
-      <input type="text"
-             class="focus:outline-none focus:ring-1 focus:ring-purple-500 w-full px-4 py-3 bg-white border rounded-xl shadow-lg transition-all duration-300
-               {{ form.get('title')?.invalid && form.get('title')?.touched ? 'border-red-500 shadow-red-200/50 focus:border-red-500 focus:shadow-red-300/50 bg-red-50' : 'border-purple-200 shadow-purple-200/50 focus:border-purple-500 focus:shadow-purple-300/50' }}"
-             formControlName="title"
-      >
+  </ng-template>
+  <form [formGroup]='form'>
+    <div class="flex flex-col relative">
+      <label for="title" class="text-sm font-medium text-slate-700">Title</label>
+      <input type="text" id="title" pInputText formControlName="title"
+             class="{{ form.get('title')?.invalid && form.get('title')?.touched ? 'ng-invalid ng-dirty' : '' }}"
+      />
       @if (form.get('title')?.errors?.['required']) {
-        <div class="absolute text-red-500 text-sm mt-1 ml-2">Title is required</div>
+        <div class='absolute mt-1 ml-2'>
+          <p-message severity="error" size="small" variant="simple">Title is required</p-message>
+        </div>
       }
       <div class="h-5"></div>
     </div>
-    <div class="flex-1 relative">
-      <label class="block text-sm font-medium text-purple-500 mb-1 ml-2 dark:text-purple-300">Due date</label>
-      <input type="date"
-             class="focus:outline-none focus:ring-1 focus:ring-purple-500 w-full px-4 py-3 bg-white border rounded-xl shadow-lg transition-all duration-300
-               {{ form.get('dueDate')?.invalid && form.get('dueDate')?.touched ? 'border-red-500 shadow-red-200/50 focus:border-red-500 focus:shadow-red-300/50 bg-red-50' : 'border-purple-200 shadow-purple-200/50 focus:border-purple-500 focus:shadow-purple-300/50' }}"
-             formControlName="dueDate"
-      >
+    <div class="flex flex-col relative">
+      <label class="text-sm font-medium text-slate-700">Due date</label>
+      <p-datepicker
+        formControlName="dueDate"
+        [showIcon]='true'
+        appendTo="body"
+        dateFormat="dd-mm-yy"
+        class="{{ (form.get('dueDate')?.invalid && form.get('dueDate')?.touched) ? 'ng-invalid ng-dirty' : '' }}"
+      ></p-datepicker>
       @if (form.get('dueDate')?.errors?.['required']) {
-        <div class="absolute text-red-500 text-sm mt-1 ml-2">Date is required</div>
+        <div class='absolute mt-1 ml-2'>
+          <p-message severity="error" size="small" variant="simple">Data is required.</p-message>
+        </div>
       }
       @if (form.get('dueDate')?.errors?.['pastDate']) {
-        <div class="absolute text-red-500 text-sm mt-1 ml-2">Date can't be at the past</div>
+        <div class='absolute mt-1 ml-2'>
+          <p-message severity="error" size="small" variant="simple">Date can't be at the past</p-message>
+        </div>
       }
       <div class="h-5"></div>
     </div>
-  </div>
 
-  <div class='mt-3 flex items-center gap-3'>
-    <p class="text-sm font-medium text-purple-500 ml-2 dark:text-purple-300">Current icon:</p>
-    <div class="cursor-pointer bg-white p-3 rounded-xl border border-purple-200 shadow-lg shadow-purple-200/50 transition-all duration-300 hover:border-purple-300 hover:shadow-purple-300/50"
-         (click)='openIcons()'
+    <label class="text-sm font-medium text-slate-700">
+      Current icon:
+    </label>
+    <div
+      class='w-10 h-10 group flex items-center justify-center relative p-3 bg-white border-2 border-gray-200 rounded-full shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer hover:border-purple-400 hover:bg-purple-50'
+      (click)='op.toggle($event)'
     >
-      <lucide-icon [img]='selectedIcon' size='18' class="text-purple-600"/>
+      <lucide-icon [img]='selectedIcon' size='18'
+                   class="text-[var(--primary)] group-hover:text-purple-600 transition-colors"/>
     </div>
-  </div>
-
-  <div class='flex justify-end mt-6'>
-    <button class='bg-purple-200 rounded-lg px-3 py-2 cursor-pointer hover:bg-purple-300' (click)='save()'>Save</button>
-  </div>
-
-  <ng-template #iconPicker>
-    <app-icon-picker (iconChange)='iconChange($event)'/>
+  </form>
+  <ng-template #footer>
+    <button class='bg-[var(--primary)] text-white rounded-lg px-3 py-2 cursor-pointer hover:bg-purple-300'
+            (click)='save()'>Save
+    </button>
   </ng-template>
-</form>
+</p-dialog>
+
+
+<p-popover #op class="compact-popover">
+  <div class="w-100 h-70 overflow-y-auto border border-gray-200 rounded shadow bg-white p-1">
+    <app-icon-picker (iconChange)="iconChange($event)"/>
+  </div>
+</p-popover>

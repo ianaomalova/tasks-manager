@@ -36,7 +36,7 @@
     @for (task of filteredTasks; track task.id) {
       <app-last-task
         [task]='task'
-        (onEdit)='openModal($event)'
+        (onEdit)='showDialog($event)'
       />
     }
   </div>
@@ -48,3 +48,12 @@
     (saveTask)="updateTask($event)"
   />
 </ng-template>
+
+@if (visible) {
+  <app-edit-task-form
+    [visible]='visible'
+    [task]='selectedTask'
+    (saveTask)="updateTask($event)"
+    (cancel)='visible = false'
+  />
+}

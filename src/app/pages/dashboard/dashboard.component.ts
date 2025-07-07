@@ -9,14 +9,20 @@ import {SortComponent} from './components/sort/sort.component';
 import {ActiveTab} from './ActiveTab';
 import {ModalService} from '../../core/services/modal.service';
 import {EditTaskFormComponent} from './components/edit-task-form/edit-task-form.component';
+import {Dialog} from 'primeng/dialog';
+import {Button} from 'primeng/button';
+import {InputText} from 'primeng/inputtext';
+import {LucideAngularModule, Pencil} from 'lucide-angular';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CardComponent, StatisticComponent, LastTaskComponent, FilterComponent, SortComponent, EditTaskFormComponent],
+  imports: [CardComponent, StatisticComponent, LastTaskComponent, FilterComponent, SortComponent, EditTaskFormComponent, Dialog, Button, InputText, LucideAngularModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
+  visible: boolean = false;
+  selectedTask!: Task;
   protected readonly tasks: Task[] = tasks;
   filteredTasks = tasks;
   @ViewChild('editTaskForm') editTaskForm!: TemplateRef<any>;
@@ -41,6 +47,7 @@ export class DashboardComponent {
   }
 
   updateTask(updatedTask: Task) {
+    this.visible = false;
     const idx = this.tasks.findIndex(t => t.id === updatedTask.id);
     if (idx > -1) {
       this.tasks[idx] = updatedTask;
@@ -54,4 +61,10 @@ export class DashboardComponent {
       context: {task}
     });
   }
+  showDialog(task: Task) {
+    this.selectedTask = task;
+    this.visible = true;
+  }
+
+  protected readonly Pencil = Pencil;
 }

@@ -6,10 +6,10 @@
   >
   </div>
   @if (progress === 0) {
-    <p class="text-[var(--text)] absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2">Not Started</p>
+    <p class="text-black absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2">Not Started</p>
   } @else if (progress >= 15 && progress < 100) {
-    <p class="text-[var(--text)] absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2">{{progress}}%</p>
+    <p class="text-black absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2">{{progress}}%</p>
   } @else if (progress === 100) {
-    <p class="text-[var(--text)] absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2">Done</p>
+    <p class="text-black absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2">Done</p>
   }
 </div>
