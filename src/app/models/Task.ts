@@ -8,4 +8,9 @@ export interface Task {
   progress: number,
   dueDate: string,
   users: number[]
+  subtasks?: {
+    id: number;
+    title: string;
+    status: Status;
+  } []
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {LucideAngularModule, Plus} from 'lucide-angular';
 
 @Component({
@@ -11,5 +11,9 @@ import {LucideAngularModule, Plus} from 'lucide-angular';
 })
 export class AddButtonComponent {
   readonly Plus = Plus;
+  @Output() onAdd = new EventEmitter();
 
+  add() {
+    this.onAdd.emit();
+  }
 }

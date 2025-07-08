@@ -1,0 +1,54 @@
+<p-dialog
+  [(visible)]="visible"
+  [dismissableMask]="true"
+  [modal]="true"
+  [style]="{ width: '23rem' }"
+  (onHide)="onDialogClose()"
+>
+  <ng-template #header>
+    <div class="inline-flex items-center justify-center gap-2">
+      <lucide-icon [img]='CopyPlus' size='20' strokeWidth='2.5'/>
+      <span class="font-bold text-xl whitespace-nowrap">Edit subtasks</span>
+    </div>
+  </ng-template>
+  <h1 class='text-center text-xl font-bold mb-3 text-[var(--primary)]'>{{task.title}}</h1>
+  <form [formGroup]='form'>
+    <div formArrayName='subtasks' class='flex flex-col gap-2'>
+      @for (taskControl of subtasks.controls; track taskControl; let index = $index) {
+        <div [formGroupName]='index'>
+          <div class='flex items-center gap-2'>
+            <input
+              pInputText
+              type='text'
+              formControlName='title'
+              placeholder='Add subtask'
+              class='w-full'
+            >
+            @if (subtasks.length > 1) {
+              <button
+                type="button"
+                class="bg-red-500 text-white rounded-lg cursor-pointer w-7 h-7"
+                (click)="removeSubtask(index)"
+              >
+                <i class="pi pi-trash" style="font-size: 0.8rem"></i>
+              </button>
+            }
+          </div>
+        </div>
+        @if (getTitleError(index)) {
+          <p-message severity="error" size="small" variant="simple">The field doesn't be empty</p-message>
+        }
+      }
+    </div>
+    <button class="mt-2 bg-purple-100 px-3 py-1 rounded-lg cursor-pointer hover:bg-purple-200"
+            type="button" (click)="addSubtask()"
+    >
+      Add subtask
+    </button>
+  </form>
+  <ng-template #footer>
+    <button class='bg-[var(--primary)] text-white rounded-lg px-3 py-2 cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-110'
+            (click)='save()'>Save
+    </button>
+  </ng-template>
+</p-dialog>

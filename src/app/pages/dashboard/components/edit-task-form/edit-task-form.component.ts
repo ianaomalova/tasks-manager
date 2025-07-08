@@ -10,7 +10,6 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import {ModalService} from '../../../../core/services/modal.service';
 import {IconPickerComponent} from '../../../../components/ui/icon-picker/icon-picker.component';
 import {getIconByName} from '../../../../utils/icon.utils';
 import {Dialog} from 'primeng/dialog';
@@ -54,7 +53,6 @@ export class EditTaskFormComponent implements OnInit {
   @ViewChild('iconPicker') iconPicker!: TemplateRef<any>;
   @ViewChild('op') overlayPanel!: OverlayPanel;
   form!: FormGroup;
-  isIconsVisible = false;
   selectedIcon: LucideIconData | undefined = Plane;
   formSubmitted = false;
 
@@ -62,9 +60,10 @@ export class EditTaskFormComponent implements OnInit {
   protected readonly Pencil = Pencil;
   protected readonly Plane = Plane;
 
-  constructor(private formBuilder: FormBuilder, private modalService: ModalService) {
+  constructor(private formBuilder: FormBuilder) {
 
   }
+
   ngOnInit() {
     this.initForm();
   }

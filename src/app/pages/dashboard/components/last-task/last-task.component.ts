@@ -29,8 +29,7 @@ export class LastTaskComponent {
 
   @Input() task!: Task;
   @Output() onEdit = new EventEmitter<Task>();
-
-  visible: boolean = false;
+  @Output() onAdd = new EventEmitter<Task>();
 
   getDue(): number {
     const currentDate = new Date()
@@ -41,6 +40,10 @@ export class LastTaskComponent {
 
   edit() {
     this.onEdit.emit(this.task);
+  }
+
+  add() {
+    this.onAdd.emit(this.task);
   }
 
   protected readonly getIconByName = getIconByName;

@@ -36,24 +36,27 @@
     @for (task of filteredTasks; track task.id) {
       <app-last-task
         [task]='task'
-        (onEdit)='showDialog($event)'
+        (onEdit)="showDialog($event, 'edit')"
+        (onAdd)="showDialog($event, 'add')"
       />
     }
   </div>
 </div>
 
-<ng-template #editTaskForm let-task="task">
+@if (visibleEditModal) {
   <app-edit-task-form
-    [task]='task'
-    (saveTask)="updateTask($event)"
-  />
-</ng-template>
-
-@if (visible) {
-  <app-edit-task-form
-    [visible]='visible'
+    [visible]='visibleEditModal'
     [task]='selectedTask'
     (saveTask)="updateTask($event)"
-    (cancel)='visible = false'
+    (cancel)='visibleEditModal = false'
+  />
+}
+
+@if (visibleAddModal) {
+  <app-add-subtasks-form
+    [visible]='visibleAddModal'
+    [task]='selectedTask'
+    (saveTask)="updateTask($event)"
+    (cancel)='visibleAddModal = false'
   />
 }

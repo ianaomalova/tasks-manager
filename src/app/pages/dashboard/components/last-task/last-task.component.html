@@ -5,7 +5,7 @@
         <div class='bg-purple-100 rounded-full w-10 h-10 flex items-center justify-center text-black'>
           <lucide-icon [img]='getIconByName(task.icon)'></lucide-icon>
         </div>
-        <p class='w-25 text-[var(--text)]'>{{ task.title }}</p>
+        <h2 class='w-25 text-[var(--text)] font-bold'>{{ task.title }}</h2>
       </div>
       <div class="card flex justify-center">
         <p-avatar-group>
@@ -16,7 +16,7 @@
         </p-avatar-group>
       </div>
     </div>
-    <div class='text-gray-500 pt-1 pl-2'>Due: {{ getDue() }}</div>
+    <div class='text-gray-500 pt-1 pl-2'>Due: {{ getDue() }}days</div>
   </div>
   <div>
     <app-progress
@@ -40,7 +40,7 @@
       </p>
     </div>
     <div class='flex items-center gap-2'>
-      <app-add-button/>
+      <app-add-button (onAdd)='add()'/>
       <app-edit-button (onEdit)='edit()'/>
     </div>
   </div>

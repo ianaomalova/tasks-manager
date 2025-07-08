@@ -1,4 +1,4 @@
-import {Component, TemplateRef, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import { CardComponent } from './components/card/card.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
 import {LastTaskComponent} from './components/last-task/last-task.component';
@@ -7,27 +7,28 @@ import {Task} from '../../models/Task';
 import {FilterComponent} from './components/filter/filter.component';
 import {SortComponent} from './components/sort/sort.component';
 import {ActiveTab} from './ActiveTab';
-import {ModalService} from '../../core/services/modal.service';
 import {EditTaskFormComponent} from './components/edit-task-form/edit-task-form.component';
 import {Dialog} from 'primeng/dialog';
 import {Button} from 'primeng/button';
 import {InputText} from 'primeng/inputtext';
-import {LucideAngularModule, Pencil} from 'lucide-angular';
+import {LucideAngularModule} from 'lucide-angular';
+import {AddSubtasksFormComponent} from './components/add-subtasks-form/add-subtasks-form.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CardComponent, StatisticComponent, LastTaskComponent, FilterComponent, SortComponent, EditTaskFormComponent, Dialog, Button, InputText, LucideAngularModule],
+  imports: [CardComponent, StatisticComponent, LastTaskComponent, FilterComponent, SortComponent, EditTaskFormComponent, Dialog, Button, InputText, LucideAngularModule, AddSubtasksFormComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
-  visible: boolean = false;
+  visibleEditModal: boolean = false;
+  visibleAddModal: boolean = false;
   selectedTask!: Task;
   protected readonly tasks: Task[] = tasks;
   filteredTasks = tasks;
-  @ViewChild('editTaskForm') editTaskForm!: TemplateRef<any>;
 
-  constructor(private modalService: ModalService) {
+  constructor(private messageService: MessageService) {
   }
 
   changeFilter(filter: ActiveTab) {
@@ -47,24 +48,27 @@ export class DashboardComponent {
   }
 
   updateTask(updatedTask: Task) {
-    this.visible = false;
+    this.visibleEditModal = false;
+    this.visibleAddModal = false;
     const idx = this.tasks.findIndex(t => t.id === updatedTask.id);
     if (idx > -1) {
       this.tasks[idx] = updatedTask;
+      console.log(this.tasks[idx]);
       this.filteredTasks = [...this.tasks];
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Updated successfully' });
     }
   }
 
-  openModal(task: Task) {
-    this.modalService.open({
-      content: this.editTaskForm,
-      context: {task}
-    });
-  }
-  showDialog(task: Task) {
+  showDialog(task: Task, name: string) {
     this.selectedTask = task;
-    this.visible = true;
-  }
+    switch (name) {
+      case 'edit':
+        this.visibleEditModal = true;
+        break;
 
-  protected readonly Pencil = Pencil;
+      case 'add':
+        this.visibleAddModal = true;
+        break;
+    }
+  }
 }
