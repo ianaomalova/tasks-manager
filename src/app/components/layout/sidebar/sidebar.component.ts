@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import {LucideAngularModule, Columns2, ChevronDown} from 'lucide-angular';
 import {projects} from '../../../projects';
 import {NgClass} from '@angular/common';
@@ -21,11 +21,18 @@ import {Avatar} from 'primeng/avatar';
 })
 export class SidebarComponent {
   isMenuOpen = true;
+  windowWidth: number = window.innerWidth;
   readonly menuItems = menuItems;
   readonly projects = projects;
 
   readonly ChevronDown = ChevronDown;
   readonly Columns2 = Columns2;
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.windowWidth = window.innerWidth;
+    this.isMenuOpen = window.innerWidth >= 1024;
+  }
 
   constructor(private router: Router) {
 

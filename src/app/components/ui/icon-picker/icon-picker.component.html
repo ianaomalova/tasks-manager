@@ -26,6 +26,8 @@
           class='w-9 h-9 bg-purple-100 flex items-center justify-center rounded-2xl cursor-pointer hover:from-pink-200 hover:to-purple-300 hover:shadow-lg hover:scale-110 hover:-translate-y-1
          transition-all duration-300 ease-out'
           (click)='selectIcon(iconEntry.name)'
+          [pTooltip]='iconEntry.name'
+          tooltipPosition='top'
         >
           <lucide-icon [img]="iconEntry.icon" size="20" strokeWidth='2' class='text-black'></lucide-icon>
         </div>

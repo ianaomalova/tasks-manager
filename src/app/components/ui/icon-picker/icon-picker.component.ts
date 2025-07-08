@@ -2,11 +2,13 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LucideAngularModule, Search} from 'lucide-angular';
 import {CategorizedIcons, filterCategorizedIcons, getCategorizedIcons} from '../../../utils/icon.utils';
 import {ModalService} from '../../../core/services/modal.service';
+import {Tooltip} from 'primeng/tooltip';
 
 @Component({
   selector: 'app-icon-picker',
   imports: [
     LucideAngularModule,
+    Tooltip,
   ],
   templateUrl: './icon-picker.component.html',
   styleUrl: './icon-picker.component.scss'
