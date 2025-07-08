@@ -19,23 +19,25 @@
       </button>
     </div>
   </div>
-  @if (viewMode === 'month') {
-    <apx-chart
-      [series]="chartOptionsMonth.series"
-      [chart]="chartOptionsMonth.chart"
-      [xaxis]="chartOptionsMonth.xaxis"
-      [stroke]="chartOptionsMonth.stroke"
-      [tooltip]="chartOptionsMonth.tooltip"
-      [dataLabels]="chartOptionsMonth.dataLabels"
-    ></apx-chart>
-  } @else {
-    <apx-chart
-      [series]="chartOptionsYear.series"
-      [chart]="chartOptionsYear.chart"
-      [xaxis]="chartOptionsYear.xaxis"
-      [stroke]="chartOptionsYear.stroke"
-      [tooltip]="chartOptionsYear.tooltip"
-      [dataLabels]="chartOptionsYear.dataLabels"
-    ></apx-chart>
-  }
+  <div class='w-full'>
+    @if (viewMode === 'month') {
+      <apx-chart
+        [series]="chartOptionsMonth.series"
+        [chart]="chartOptionsMonth.chart"
+        [xaxis]="chartOptionsMonth.xaxis"
+        [stroke]="chartOptionsMonth.stroke"
+        [tooltip]="chartOptionsMonth.tooltip"
+        [dataLabels]="chartOptionsMonth.dataLabels"
+      ></apx-chart>
+    } @else {
+      <apx-chart
+        [series]="chartOptionsYear.series"
+        [chart]="chartOptionsYear.chart"
+        [xaxis]="chartOptionsYear.xaxis"
+        [stroke]="chartOptionsYear.stroke"
+        [tooltip]="chartOptionsYear.tooltip"
+        [dataLabels]="chartOptionsYear.dataLabels"
+      ></apx-chart>
+    }
+  </div>
 </div>

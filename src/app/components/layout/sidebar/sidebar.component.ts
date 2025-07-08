@@ -6,6 +6,7 @@ import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {menuItems} from '../../../configs/nav.config';
 import {getIconByName} from '../../../utils/icon.utils';
 import {Avatar} from 'primeng/avatar';
+import {Popover} from 'primeng/popover';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +15,8 @@ import {Avatar} from 'primeng/avatar';
     RouterLink,
     RouterLinkActive,
     NgClass,
-    Avatar
+    Avatar,
+    Popover
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'

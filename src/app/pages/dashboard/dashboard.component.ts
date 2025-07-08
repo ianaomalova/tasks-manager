@@ -10,11 +10,13 @@ import {ActiveTab} from './ActiveTab';
 import {EditTaskFormComponent} from './components/edit-task-form/edit-task-form.component';
 import {LucideAngularModule} from 'lucide-angular';
 import {AddSubtasksFormComponent} from './components/add-subtasks-form/add-subtasks-form.component';
-import { MessageService } from 'primeng/api';
+import {MessageService, PrimeTemplate} from 'primeng/api';
+import {TimelineComponent} from './components/timeline/timeline.component';
+import {Carousel} from 'primeng/carousel';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CardComponent, StatisticComponent, LastTaskComponent, FilterComponent, SortComponent, EditTaskFormComponent, LucideAngularModule, AddSubtasksFormComponent],
+  imports: [CardComponent, StatisticComponent, LastTaskComponent, FilterComponent, SortComponent, EditTaskFormComponent, LucideAngularModule, AddSubtasksFormComponent, TimelineComponent, Carousel, PrimeTemplate],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })

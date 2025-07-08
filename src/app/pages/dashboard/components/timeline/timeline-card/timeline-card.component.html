@@ -1,0 +1,19 @@
+<div class='bg-[var(--purple-light)] rounded-2xl p-5 w-[250px]'>
+  <div class='flex items-center gap-3'>
+    <div class='bg-white w-10 h-10 flex items-center justify-center rounded-full'>
+      <lucide-icon [img]='getIconByName(task.icon)' class='text-[var(--primary)]' size='24'/>
+    </div>
+    <div>
+      <p class='text-black text-lg'>{{task.title}}</p>
+      <p class='text-black text-sm'>10 am-1.30 pm</p>
+    </div>
+  </div>
+  <div class='mt-5'>
+    <p-avatar-group>
+      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" size="normal" shape="circle" />
+      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" size="normal" shape="circle" />
+      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/onyamalimba.png" size="normal" shape="circle" />
+      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png" size="normal" shape="circle" />
+    </p-avatar-group>
+  </div>
+</div>
