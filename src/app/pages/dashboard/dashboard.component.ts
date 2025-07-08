@@ -8,16 +8,13 @@ import {FilterComponent} from './components/filter/filter.component';
 import {SortComponent} from './components/sort/sort.component';
 import {ActiveTab} from './ActiveTab';
 import {EditTaskFormComponent} from './components/edit-task-form/edit-task-form.component';
-import {Dialog} from 'primeng/dialog';
-import {Button} from 'primeng/button';
-import {InputText} from 'primeng/inputtext';
 import {LucideAngularModule} from 'lucide-angular';
 import {AddSubtasksFormComponent} from './components/add-subtasks-form/add-subtasks-form.component';
 import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CardComponent, StatisticComponent, LastTaskComponent, FilterComponent, SortComponent, EditTaskFormComponent, Dialog, Button, InputText, LucideAngularModule, AddSubtasksFormComponent],
+  imports: [CardComponent, StatisticComponent, LastTaskComponent, FilterComponent, SortComponent, EditTaskFormComponent, LucideAngularModule, AddSubtasksFormComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
@@ -53,7 +50,6 @@ export class DashboardComponent {
     const idx = this.tasks.findIndex(t => t.id === updatedTask.id);
     if (idx > -1) {
       this.tasks[idx] = updatedTask;
-      console.log(this.tasks[idx]);
       this.filteredTasks = [...this.tasks];
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Updated successfully' });
     }

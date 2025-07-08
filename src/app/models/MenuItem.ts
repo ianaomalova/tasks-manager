@@ -1,7 +1,7 @@
 import {LucideIconData} from 'lucide-angular';
 
 export interface IMenuItem {
-  icon: LucideIconData;
+  icon: string;
   link: string;
   title: string;
   badge?: number

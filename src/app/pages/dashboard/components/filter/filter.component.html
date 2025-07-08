@@ -3,17 +3,20 @@
     class="cursor-pointer text-sm py-1 px-3 rounded-4xl transition-all duration-200 ease-in-out"
     [ngClass]="{
       'bg-white text-gray-800 shadow-md scale-105': selectedTab === 'All',
-      'hover:bg-purple-200 hover:scale-100 ': selectedTab !== 'All'
+      'hover:bg-white hover:scale-100': selectedTab !== 'All'
     }"
     (click)="changeTab('All')"
   >
-    All
+    <div class='flex items-center gap-2'>
+      <i class="pi pi-filter"></i>
+      <span>All</span>
+    </div>
   </button>
     <button
       class="cursor-pointer text-sm py-1 px-3 rounded-4xl transition-all duration-200 ease-in-out"
       [ngClass]="{
       'bg-white text-gray-800 shadow-md scale-105': selectedTab === 'Completed',
-      'hover:bg-purple-200 hover:scale-100': selectedTab !== 'Completed'
+      'hover:bg-white hover:scale-100': selectedTab !== 'Completed'
     }"
       (click)="changeTab('Completed')"
     >
@@ -27,7 +30,7 @@
     class="cursor-pointer text-sm py-1 px-3 rounded-4xl transition-all duration-200 ease-in-out"
     [ngClass]="{
       'bg-white text-gray-800 shadow-md scale-105': selectedTab === 'In Progress',
-      'hover:bg-purple-200 hover:scale-100 ': selectedTab !== 'In Progress'
+      'hover:bg-white hover:scale-100': selectedTab !== 'In Progress'
     }"
     (click)="changeTab('In Progress')"
   >
@@ -40,7 +43,7 @@
     class="cursor-pointer text-sm py-1 px-3 rounded-4xl transition-all duration-200 ease-in-out"
     [ngClass]="{
       'bg-white text-gray-800 shadow-md scale-105': selectedTab === 'Not Started',
-      'hover:bg-purple-200 hover:scale-100': selectedTab !== 'Not Started'
+      'hover:bg-white hover:scale-100': selectedTab !== 'Not Started'
     }"
     (click)="changeTab('Not Started')"
   >

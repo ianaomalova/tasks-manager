@@ -6,6 +6,7 @@ import {Task} from '../../../../models/Task';
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
 import {Message} from 'primeng/message';
+import {Tooltip} from 'primeng/tooltip';
 
 @Component({
   selector: 'app-add-subtasks-form',
@@ -14,7 +15,8 @@ import {Message} from 'primeng/message';
     LucideAngularModule,
     ReactiveFormsModule,
     InputText,
-    Message
+    Message,
+    Tooltip
   ],
   templateUrl: './add-subtasks-form.component.html',
   styleUrl: './add-subtasks-form.component.scss'
@@ -66,7 +68,6 @@ export class AddSubtasksFormComponent implements OnInit {
 
   addSubtask() {
     this.subtasks.push(this.formBuilder.group({
-      id: 156,
       title: ['', Validators.required],
       status: 'Not Started'
     }))

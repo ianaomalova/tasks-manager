@@ -1,11 +1,17 @@
-<div class='bg-[var(--foreground)] rounded-2xl p-4 min-h-54 flex flex-col gap-4'>
+<div class='bg-[var(--foreground)] rounded-2xl p-4 min-h-54 flex flex-col gap-4 hover:-translate-y-1 hover:shadow-lg transition-all duration-300'>
   <div class='flex flex-col'>
     <div class='flex items-start justify-between min-h-12'>
       <div class='flex gap-4'>
         <div class='bg-purple-100 rounded-full w-10 h-10 flex items-center justify-center text-black'>
           <lucide-icon [img]='getIconByName(task.icon)'></lucide-icon>
         </div>
-        <h2 class='w-25 text-[var(--text)] font-bold'>{{ task.title }}</h2>
+        <h2
+          class='w-25 text-[var(--text)] font-bold line-clamp-2'
+          [pTooltip]='task.title'
+          tooltipPosition='top'
+        >
+          {{ task.title }}
+        </h2>
       </div>
       <div class="card flex justify-center">
         <p-avatar-group>
@@ -40,8 +46,16 @@
       </p>
     </div>
     <div class='flex items-center gap-2'>
-      <app-add-button (onAdd)='add()'/>
-      <app-edit-button (onEdit)='edit()'/>
+      <app-add-button
+        (onAdd)='add()'
+        pTooltip='Edit subtasks'
+        tooltipPosition="top"
+      />
+      <app-edit-button
+        (onEdit)='edit()'
+        pTooltip='Edit task'
+        tooltipPosition="top"
+      />
     </div>
   </div>
 </div>

@@ -1,5 +1,10 @@
 import {Status} from './Status';
 
+export interface SubTask {
+  title: string;
+  status: Status;
+}
+
 export interface Task {
   id: number;
   icon: string;
@@ -8,9 +13,5 @@ export interface Task {
   progress: number,
   dueDate: string,
   users: number[]
-  subtasks?: {
-    id: number;
-    title: string;
-    status: Status;
-  } []
+  subtasks?: SubTask []
 }

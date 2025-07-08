@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import {LucideAngularModule, Columns2, LayoutDashboardIcon, MessageCircleMore, ChartNoAxesCombined, CalendarRange, Users, ClipboardMinus, Settings, ChevronDown} from 'lucide-angular';
-import {IMenuItem} from '../../../models/MenuItem';
+import {LucideAngularModule, Columns2, ChevronDown} from 'lucide-angular';
 import {projects} from '../../../projects';
 import {NgClass} from '@angular/common';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
+import {menuItems} from '../../../configs/nav.config';
+import {getIconByName} from '../../../utils/icon.utils';
+import {Avatar} from 'primeng/avatar';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,33 +13,19 @@ import {Router, RouterLink, RouterLinkActive} from '@angular/router';
     LucideAngularModule,
     RouterLink,
     RouterLinkActive,
-    NgClass
+    NgClass,
+    Avatar
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
-  readonly DashboardIcon = LayoutDashboardIcon;
-  readonly MessageCircleMore = MessageCircleMore;
-  readonly ChartNoAxesCombined = ChartNoAxesCombined;
-  readonly CalendarRange = CalendarRange;
-  readonly Users = Users;
-  readonly ClipboardMinus = ClipboardMinus;
-  readonly Settings = Settings;
-  readonly ChevronDown = ChevronDown;
-  readonly Columns2 = Columns2;
-
+  isMenuOpen = true;
+  readonly menuItems = menuItems;
   readonly projects = projects;
 
-  menuItems: IMenuItem[] = [
-    { icon: this.DashboardIcon, title: 'Dashboard', link: '/dashboard' },
-    { icon: this.MessageCircleMore, title: 'Messages', link: '/messages', badge: 4 },
-    { icon: this.ChartNoAxesCombined, title: 'Insight', link: '/insight' },
-    { icon: this.Users, title: 'Team', link: '/team' },
-    { icon: this.CalendarRange, title: 'Schedule', link: '/schedule' },
-    { icon: this.ClipboardMinus, title: 'Report', link: '/report' },
-    { icon: this.Settings, title: 'Settings', link: '/settings' },
-  ]
+  readonly ChevronDown = ChevronDown;
+  readonly Columns2 = Columns2;
 
   constructor(private router: Router) {
 
@@ -46,4 +34,10 @@ export class SidebarComponent {
   isActive(link: string): boolean {
     return this.router.isActive(link, { paths: 'exact', queryParams: 'exact', fragment: 'ignored', matrixParams: 'ignored' });
   }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  protected readonly getIconByName = getIconByName;
 }

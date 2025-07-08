@@ -7,6 +7,7 @@ import {Task} from '../../../../models/Task';
 import {getIconByName} from '../../../../utils/icon.utils';
 import {Avatar} from 'primeng/avatar';
 import {AvatarGroup} from 'primeng/avatargroup';
+import {Tooltip} from 'primeng/tooltip';
 
 @Component({
   selector: 'app-last-task',
@@ -17,6 +18,7 @@ import {AvatarGroup} from 'primeng/avatargroup';
     EditButtonComponent,
     Avatar,
     AvatarGroup,
+    Tooltip,
   ],
   templateUrl: './last-task.component.html',
   styleUrl: './last-task.component.scss'

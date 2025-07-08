@@ -10,9 +10,9 @@ export const tasks: Task[] = [
     dueDate: '2025-07-15',
     users: [101, 102],
     subtasks: [
-      { id: 11, title: 'Subtask 1', status: 'Not Started' },
-      { id: 12, title: 'Subtask 2', status: 'In Progress' },
-      { id: 13, title: 'Subtask 3', status: 'Completed' },
+      { title: 'Subtask 1', status: 'Not Started' },
+      { title: 'Subtask 2', status: 'In Progress' },
+      { title: 'Subtask 3', status: 'Completed' },
     ],
   },
   {
