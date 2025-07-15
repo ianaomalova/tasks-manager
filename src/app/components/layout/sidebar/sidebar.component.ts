@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {LucideAngularModule, Columns2, ChevronDown} from 'lucide-angular';
 import {projects} from '../../../projects';
 import {NgClass} from '@angular/common';
@@ -21,7 +21,7 @@ import {Popover} from 'primeng/popover';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   isMenuOpen = true;
   windowWidth: number = window.innerWidth;
   readonly menuItems = menuItems;
@@ -40,12 +40,17 @@ export class SidebarComponent {
 
   }
 
+  ngOnInit() {
+    this.isMenuOpen = localStorage.getItem('menu') === 'true';
+  }
+
   isActive(link: string): boolean {
     return this.router.isActive(link, { paths: 'exact', queryParams: 'exact', fragment: 'ignored', matrixParams: 'ignored' });
   }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+    localStorage.setItem('menu', JSON.stringify(this.isMenuOpen));
   }
 
   protected readonly getIconByName = getIconByName;

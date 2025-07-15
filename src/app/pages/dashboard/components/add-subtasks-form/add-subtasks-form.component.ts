@@ -59,6 +59,8 @@ export class AddSubtasksFormComponent implements OnInit {
           status: subtask.status
         }))
       })
+    } else {
+      this.addSubtask();
     }
   }
 

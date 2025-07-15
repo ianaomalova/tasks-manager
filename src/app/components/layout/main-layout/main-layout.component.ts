@@ -3,7 +3,7 @@ import {SidebarComponent} from '../sidebar/sidebar.component';
 import {ChatComponent} from '../../chat/chat.component';
 import {ActivatedRoute, NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {ThemeToggleComponent} from '../../ui/theme-toggle/theme-toggle.component';
-import {filter, map, Subscription} from 'rxjs';
+import {filter, map, merge, of, Subscription} from 'rxjs';
 import {SearchComponent} from '../../ui/search/search.component';
 import {NotifyComponent} from '../../ui/notify/notify.component';
 
@@ -29,20 +29,24 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.routeSub = this.router.events
+    this.routeSub = merge(
+      of(null),
+      this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+    )
       .pipe(
-        filter(event => event instanceof NavigationEnd),
-        map(() => {
-          let route = this.activatedRoute;
-          while (route.firstChild) {
-            route = route.firstChild;
-          }
-          return route.snapshot.data['title'] || 'Default Page';
-        })
+        map(() => this.getRouteTitle())
       )
       .subscribe(title => {
         this.pageTitle = title;
       });
+  }
+
+  private getRouteTitle(): string {
+    let route = this.activatedRoute;
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+    return route.snapshot.data['title'] || 'Default Page';
   }
 
   ngOnDestroy() {

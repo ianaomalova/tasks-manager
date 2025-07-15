@@ -21,28 +21,33 @@
       />
     </div>
     <div class='col-span-2'>
-      <app-statistic />
+      <app-statistic/>
     </div>
   </div>
 
   <div class='flex items-center justify-between'>
-    <h2 class='mb-4 font-medium text-2xl text-[var(--text)]'>Last tasks <span class='text-gray-500 text-2xl'>({{filteredTasks.length}})</span></h2>
+    <h2 class='mb-4 font-medium text-2xl text-[var(--text)]'>Last tasks <span
+      class='text-gray-500 text-2xl'>({{ filteredTasks.length }})</span></h2>
     <div class='flex items-center gap-4'>
       <app-filter (selectedTabChange)='changeFilter($event)'/>
       <app-sort (onSortChange)='sortChange($event)'/>
     </div>
   </div>
   <div class='grid grid-cols-3 gap-6'>
-    @for (task of filteredTasks; track task.id) {
-      <app-last-task
-        [task]='task'
-        (onEdit)="showDialog($event, 'edit')"
-        (onAdd)="showDialog($event, 'add')"
-      />
+    @if (filteredTasks.length === 0) {
+      <p>Not found</p>
+    } @else {
+      @for (task of filteredTasks; track task.id) {
+        <app-last-task
+          [task]='task'
+          (onEdit)="showDialog($event, 'edit')"
+          (onAdd)="showDialog($event, 'add')"
+        />
+      }
     }
   </div>
   <div>
-    <app-timeline />
+    <app-timeline/>
   </div>
 </div>
 

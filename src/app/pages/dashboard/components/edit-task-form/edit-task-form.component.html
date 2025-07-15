@@ -18,9 +18,7 @@
              class="{{ form.get('title')?.invalid && form.get('title')?.touched ? 'ng-invalid ng-dirty' : '' }}"
       />
       @if (form.get('title')?.errors?.['required']) {
-        <div class='absolute mt-1 ml-2'>
           <p-message severity="error" size="small" variant="simple">Title is required</p-message>
-        </div>
       }
       <div class="h-5"></div>
     </div>
@@ -34,14 +32,10 @@
         class="{{ (form.get('dueDate')?.invalid && form.get('dueDate')?.touched) ? 'ng-invalid ng-dirty' : '' }}"
       ></p-datepicker>
       @if (form.get('dueDate')?.errors?.['required']) {
-        <div class='absolute mt-1 ml-2'>
           <p-message severity="error" size="small" variant="simple">Data is required.</p-message>
-        </div>
       }
       @if (form.get('dueDate')?.errors?.['pastDate']) {
-        <div class='absolute mt-1 ml-2'>
           <p-message severity="error" size="small" variant="simple">Date can't be at the past</p-message>
-        </div>
       }
       <div class="h-5"></div>
     </div>
