@@ -6,10 +6,16 @@ import { providePrimeNG } from 'primeng/config';
 import { MessageService } from 'primeng/api';
 import Aura from '@primeng/themes/aura';
 
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+
 import { routes } from './app.routes';
+import {environment} from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => getAuth()),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimations(),
