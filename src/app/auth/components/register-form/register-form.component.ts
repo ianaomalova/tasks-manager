@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-register-form',
@@ -7,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrl: './register-form.component.scss'
 })
 export class RegisterFormComponent {
+  @Output() change: EventEmitter<void> = new EventEmitter();
+  constructor(private authService: AuthService) {
+  }
+  register() {
+    this.authService.registerUser('biba1234@mail.com', '123456', 'iana', 'bebebe').subscribe(res => console.log(res));
+  }
 
+  changeFormMode() {
+    this.change.emit();
+  }
 }

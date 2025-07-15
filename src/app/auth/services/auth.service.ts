@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {from, Observable, of, switchMap} from 'rxjs';
+import {catchError, from, Observable, of, switchMap, throwError} from 'rxjs';
 import {
   Auth,
   createUserWithEmailAndPassword,
@@ -14,7 +14,7 @@ import {
 })
 export class AuthService {
 
-  constructor(private auth: Auth,) { }
+  constructor(private auth: Auth) { }
 
   login(): Observable<any> {
     return from(signInWithEmailAndPassword(this.auth, 'test2@example.com', '123456'))
@@ -22,6 +22,19 @@ export class AuthService {
         switchMap((userCredential) => {
           const user = userCredential.user;
           return this.updateTokenObservable(user);
+        })
+      )
+  }
+
+  registerUser(email: string, password: string, firstName: string, lastName: string): Observable<User> {
+    return from(createUserWithEmailAndPassword(this.auth, email, password))
+      .pipe(
+        switchMap(userCredential => {
+          const user = userCredential.user;
+          return from(updateProfile(user, {displayName: `${firstName} ${lastName}`}))
+            .pipe(
+              switchMap(() => this.updateTokenObservable(user))
+            )
         })
       )
   }
