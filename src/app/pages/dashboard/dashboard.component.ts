@@ -13,6 +13,7 @@ import {AddSubtasksFormComponent} from './components/add-subtasks-form/add-subta
 import {MessageService, PrimeTemplate} from 'primeng/api';
 import {TimelineComponent} from './components/timeline/timeline.component';
 import {Carousel} from 'primeng/carousel';
+import {DashboardService} from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,7 +28,8 @@ export class DashboardComponent {
   protected readonly tasks: Task[] = tasks;
   filteredTasks = tasks;
 
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService, private dashboardService: DashboardService) {
+    this.dashboardService.getAllTasks().subscribe(response => {console.log(response);})
   }
 
   changeFilter(filter: ActiveTab) {
