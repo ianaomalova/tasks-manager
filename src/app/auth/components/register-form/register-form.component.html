@@ -1,11 +1,10 @@
 <form
   [formGroup]='form'
   (ngSubmit)='register()'
-  class='w-[450px] h-170 rounded-br-2xl rounded-tr-2xl
+  class='w-[450px] h-190 rounded-br-2xl rounded-tr-2xl
   md:rounded-2xl glass-form flex flex-col justify-center p-2'
 >
-  <h2 class='text-center mt-5 mb-2 font-bold text-3xl text-white'>Welcome</h2>
-  <p class='text-center text-black mb-7'>Register to your task hub account</p>
+  <p class='text-center text-white mb-7 text-3xl'>Register to your task hub account</p>
 
   <div class='flex gap-2 mb-2'>
     <div class='flex-1 flex flex-col gap-1'>
@@ -13,16 +12,28 @@
       <input
         formControlName='first_name'
         type="text"
-        class='h-10 rounded-md text-sm'
+        class='h-10 mb-1 rounded-md text-sm'
+        [ngClass]="{'error-input': form.get('first_name')?.invalid && (form.get('first_name')?.dirty || form.get('first_name')?.touched)}"
       />
+      @if (form.get('first_name')?.errors?.['required'] && (form.get('first_name')?.dirty || form.get('first_name')?.touched)) {
+        <div class='ml-2'>
+          <p-message severity="error" size="small" variant="simple">First name is required.</p-message>
+        </div>
+      }
     </div>
     <div class='flex-1 flex flex-col gap-1'>
       <label class='ml-1'>Last name</label>
       <input
         formControlName='last_name'
         type="text"
-        class='h-10 rounded-md text-sm'
+        class='h-10 mb-1 rounded-md text-sm'
+        [ngClass]="{'error-input': form.get('last_name')?.invalid && (form.get('last_name')?.dirty || form.get('last_name')?.touched)}"
       />
+      @if (form.get('last_name')?.errors?.['required'] && (form.get('last_name')?.dirty || form.get('last_name')?.touched)) {
+        <div class='ml-2'>
+          <p-message severity="error" size="small" variant="simple">Last name is required.</p-message>
+        </div>
+      }
     </div>
   </div>
 
@@ -31,8 +42,21 @@
     <input
       formControlName='email'
       type="text"
-      class='h-10 rounded-md text-sm'
+      class='h-10 mb-1 rounded-md text-sm'
+      [ngClass]="{'error-input': form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)}"
     />
+    @if (form.get('email')?.errors?.['required'] && (form.get('email')?.dirty || form.get('email')?.touched)) {
+      <div class='ml-2'>
+        <p-message severity="error" size="small" variant="simple">Email is required.</p-message>
+      </div>
+    }
+
+    @if (form.get('email')?.errors?.['email'] && (form.get('email')?.dirty || form.get('email')?.touched)) {
+      <div class='ml-2'>
+        <p-message severity="error" size="small" variant="simple">Email is required.</p-message>
+      </div>
+    }
+
   </div>
 
   <div class='flex flex-col gap-1 mb-2'>
@@ -40,8 +64,20 @@
     <input
       formControlName='password'
       type="password"
-      class='h-10 rounded-md text-sm'
+      class='h-10 mb-1 rounded-md text-sm'
+      [ngClass]="{'error-input': form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)}"
     />
+    @if (form.get('password')?.errors?.['required'] && (form.get('password')?.dirty || form.get('password')?.touched)) {
+      <div class='ml-2'>
+        <p-message severity="error" size="small" variant="simple">Password is required.</p-message>
+      </div>
+    }
+
+    @if (form.get('password')?.errors?.['minlength'] && (form.get('password')?.dirty || form.get('password')?.touched)) {
+      <div class='ml-2'>
+        <p-message severity="error" size="small" variant="simple">Min length must be 6</p-message>
+      </div>
+    }
   </div>
 
   <div class='flex flex-col gap-1 mb-2'>
@@ -49,8 +85,19 @@
     <input
       formControlName='confirm_password'
       type="password"
-      class='h-10 rounded-md text-sm'
+      class='h-10 mb-1 rounded-md text-sm'
+      [ngClass]="{'error-input': form.get('confirm_password')?.invalid && (form.get('confirm_password')?.dirty || form.get('confirm_password')?.touched)}"
     />
+    @if (form.get('confirm_password')?.errors?.['required'] && (form.get('confirm_password')?.dirty || form.get('confirm_password')?.touched)) {
+      <div class='ml-2'>
+        <p-message severity="error" size="small" variant="simple">Confirm your password</p-message>
+      </div>
+    }
+    @if (form.get('confirm_password')?.errors?.['passwordMismatch'] && (form.get('confirm_password')?.touched)) {
+      <div class='ml-2'>
+        <p-message severity="error" size="small" variant="simple">Passwords do not match</p-message>
+      </div>
+    }
   </div>
 
   <div class='flex items-center mb-2'>

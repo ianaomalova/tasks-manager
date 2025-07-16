@@ -19,7 +19,7 @@
     </lucide-angular>
   </button>
 
-<!--  Развертнутая версия меню -->
+  <!--  Развертнутая версия меню -->
   @if (isMenuOpen) {
     <div
       class='transition-opacity duration-300'
@@ -28,10 +28,11 @@
         <p class='text-gray-300 mb-3'>Account</p>
         <div class='h-15 mb-3 rounded-4xl flex items-center justify-between px-2 bg-[var(--light-gray)]'>
           <div class='flex items-center gap-3'>
-            <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" size="large" shape="circle" />
+            <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" size="large"
+                      shape="circle"/>
             <div>
-              <p class='font-bold text-[var(--text)]'>Iana Malova</p>
-              <p class='text-sm text-gray-400'>mail&#64;gmail.com</p>
+              <p class='font-bold text-[var(--text)]'>{{ userName }}</p>
+              <p class='text-sm text-gray-400'>{{ email }}</p>
             </div>
           </div>
           <button
@@ -62,7 +63,7 @@
                 [ngClass]="{'!text-white': isActive(item.link)}"
               >
               </lucide-angular>
-              <p>{{item.title}}</p>
+              <p>{{ item.title }}</p>
             </div>
 
             @if (item.badge) {
@@ -70,7 +71,7 @@
                 class='bg-purple-200 rounded-lg px-3 font-medium'
                 [ngClass]="{'text-black': isActive(item.link)}"
               >
-                {{item.badge}}
+                {{ item.badge }}
               </p>
             }
           </a>
@@ -85,21 +86,22 @@
               [class]='project.color'
             >
             </div>
-            <p class='text-gray-500'>{{project.name}}</p>
+            <p class='text-gray-500'>{{ project.name }}</p>
           </div>
         }
       </div>
     </div>
   }
 
-<!--  Свернутая версия меню -->
+  <!--  Свернутая версия меню -->
   @if (!isMenuOpen) {
     <div
       class='transition-opacity duration-300'
     >
       <div class='flex flex-col gap-4 mt-16'>
         <div class='mx-auto'>
-          <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" size="large" shape="circle" />
+          <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" size="large"
+                    shape="circle"/>
         </div>
         @for (item of menuItems; track item.title) {
           <a
@@ -123,6 +125,13 @@
 
 <p-popover #profile>
   <div>
-    afdfdsfds
+    <p class='text-xl font-bold mb-2'>{{ userName }}</p>
+    <button
+      class='bg-[var(--primary)] text-white rounded-xl px-3 py-2 cursor-pointer
+             hover:shadow-lg transition-all duration-300 hover:scale-105'
+      (click)='logout()'
+    >
+      Log out
+    </button>
   </div>
 </p-popover>

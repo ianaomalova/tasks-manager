@@ -1,28 +1,45 @@
 <form
   [formGroup]='form'
   (ngSubmit)='login()'
-  class='w-[450px] h-170 rounded-br-2xl rounded-tr-2xl md:rounded-2xl
+  class='w-[450px] h-190 rounded-br-2xl rounded-tr-2xl md:rounded-2xl
   glass-form flex flex-col justify-center'
 >
   <h2 class='text-center mt-5 mb-2 font-bold text-3xl text-white'>Welcome back</h2>
   <p class='text-center text-black mb-4'>Login in to your task hub account</p>
 
-  <div class='flex flex-col gap-1'>
+  <div class='flex flex-col gap-1 mb-4'>
     <label class='ml-2'>Email</label>
     <input
       formControlName='email'
       type="text"
-      class='mb-5'
+      class='mb-1'
+      [ngClass]="{'error-input': form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)}"
     />
+    @if (form.get('email')?.errors?.['required'] && (form.get('email')?.dirty || form.get('email')?.touched)) {
+      <div class='ml-2'>
+        <p-message severity="error" size="small" variant="simple">Email is required.</p-message>
+      </div>
+    }
+    @if (form.get('email')?.errors?.['email'] && (form.get('email')?.dirty || form.get('email')?.touched)) {
+      <div class='ml-2'>
+        <p-message severity="error" size="small" variant="simple">The field must be an email</p-message>
+      </div>
+    }
   </div>
 
-  <div class='flex flex-col gap-1'>
+  <div class='flex flex-col gap-1 mb-4'>
     <label class='ml-2'>Password</label>
     <input
       formControlName='password'
       type="password"
-      class='mb-5'
+      class='mb-1'
+      [ngClass]="{'error-input': form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)}"
     />
+    @if (form.get('password')?.errors?.['required'] && (form.get('password')?.dirty || form.get('password')?.touched)) {
+      <div class='ml-2'>
+        <p-message severity="error" size="small" variant="simple">Password is required.</p-message>
+      </div>
+    }
   </div>
 
   <!-- Разделитель -->

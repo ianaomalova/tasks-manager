@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, from, map, Observable, switchMap} from 'rxjs';
+import {BehaviorSubject, filter, from, map, Observable, switchMap, take} from 'rxjs';
 import {
   Auth,
   createUserWithEmailAndPassword,
@@ -14,12 +14,27 @@ import {
 })
 export class AuthService {
   private userSubject$ = new BehaviorSubject<User | null>(null);
-  user$ = this.userSubject$.asObservable();
+  private authInitializedSubject = new BehaviorSubject<boolean>(false);
+
+  public user$ = this.userSubject$.asObservable();
+  public authInitialized$ = this.authInitializedSubject.asObservable();
 
   constructor(private auth: Auth) {
     onAuthStateChanged(this.auth, user => {
       this.userSubject$.next(user);
+
+      if (!this.authInitializedSubject.value) {
+        this.authInitializedSubject.next(true);
+      }
     })
+  }
+
+  waitForAuth(): Observable<User | null> {
+    return this.authInitialized$.pipe(
+      filter(isInitialized => isInitialized),
+      switchMap(() => this.user$),
+      take(1)
+    )
   }
 
   login(email: string, password: string): Observable<any> {
