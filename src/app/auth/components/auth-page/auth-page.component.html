@@ -5,11 +5,11 @@
       <ng-container [ngSwitch]="formType">
         <app-login-form
           *ngSwitchCase="'login'"
-          (change)='changeType()'
+          (changeMode)='changeType()'
         />
         <app-register-form
           *ngSwitchCase="'register'"
-          (change)='changeType()'
+          (changeMode)='changeType()'
         />
       </ng-container>
     </div>

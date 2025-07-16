@@ -1,50 +1,56 @@
 import { Injectable } from '@angular/core';
-import {catchError, from, Observable, of, switchMap, throwError} from 'rxjs';
+import {BehaviorSubject, from, map, Observable, switchMap} from 'rxjs';
 import {
   Auth,
   createUserWithEmailAndPassword,
   User,
   updateProfile,
   signInWithEmailAndPassword,
-  onAuthStateChanged
+  onAuthStateChanged, signOut
 } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private userSubject$ = new BehaviorSubject<User | null>(null);
+  user$ = this.userSubject$.asObservable();
 
-  constructor(private auth: Auth) { }
+  constructor(private auth: Auth) {
+    onAuthStateChanged(this.auth, user => {
+      this.userSubject$.next(user);
+    })
+  }
 
-  login(): Observable<any> {
-    return from(signInWithEmailAndPassword(this.auth, 'test2@example.com', '123456'))
+  login(email: string, password: string): Observable<any> {
+    return from(signInWithEmailAndPassword(this.auth, email, password))
       .pipe(
-        switchMap((userCredential) => {
-          const user = userCredential.user;
-          return this.updateTokenObservable(user);
-        })
+        map(userCredentials => userCredentials.user)
       )
   }
 
   registerUser(email: string, password: string, firstName: string, lastName: string): Observable<User> {
     return from(createUserWithEmailAndPassword(this.auth, email, password))
       .pipe(
-        switchMap(userCredential => {
-          const user = userCredential.user;
+        switchMap(userCredentials => {
+          const user = userCredentials.user;
           return from(updateProfile(user, {displayName: `${firstName} ${lastName}`}))
             .pipe(
-              switchMap(() => this.updateTokenObservable(user))
+              map(() => user)
             )
         })
       )
   }
 
-  private updateTokenObservable(user: User): Observable<User> {
-    return from(user.getIdToken(true)).pipe(
-      switchMap((token) => {
-        localStorage.setItem('token', token);
-        return of(user);
-      })
-    );
+  logout(): Observable<void> {
+    return from(signOut(this.auth));
+  }
+
+  isAuthenticated() {
+    return !!this.auth.currentUser;
+  }
+
+  getCurrentUser(): User | null {
+    return this.auth.currentUser;
   }
 }
