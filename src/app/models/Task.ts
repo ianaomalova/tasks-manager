@@ -6,12 +6,14 @@ export interface SubTask {
 }
 
 export interface Task {
-  id: number;
+  id: string;
+  ownerId: string;
+  description?: string;
   icon: string;
   title: string,
   status: Status,
   progress: number,
   dueDate: string,
-  users: number[]
+  users: string[]
   subtasks?: SubTask []
 }

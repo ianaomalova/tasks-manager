@@ -2,13 +2,14 @@ import { Task } from './models/Task';
 
 export const tasks: Task[] = [
   {
-    id: 1,
+    id: '1',
+    ownerId: 'uid_123',
     icon: 'star',
     title: 'Design Main Page',
     status: 'In Progress',
     progress: 60,
     dueDate: '2025-07-15',
-    users: [101, 102],
+    users: ['uid_abc', 'uid_xyz'],
     subtasks: [
       { title: 'Subtask 1', status: 'Not Started' },
       { title: 'Subtask 2', status: 'In Progress' },
@@ -16,22 +17,24 @@ export const tasks: Task[] = [
     ],
   },
   {
-    id: 2,
+    id: '2',
+    ownerId: 'uid_124',
     icon: 'Plane',
     title: 'Setup DB',
     status: 'In Progress',
     progress: 39,
     dueDate: '2025-07-20',
-    users: [103, 104],
+    users: ['uid_abc', 'uid_xyz']
   },
   {
-    id: 3,
+    id: '3',
+    ownerId: 'uid_124',
     icon: 'Plane',
     title: 'Build Auth API',
     status: 'Completed',
     progress: 100,
     dueDate: '2025-07-10',
-    users: [105, 106],
+    users: ['uid_abc', 'uid_xyz']
   },
   // {
   //   id: 4,

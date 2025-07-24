@@ -1,0 +1,27 @@
+<div class='bg-[var(--foreground)] border-2 border-stone-300
+            min-w-68 rounded-xl p-4 hover:border-indigo-400 transition-all duration-200 ease-in-out
+            hover:shadow-lg hover:-translate-y-1'
+>
+  <div class='flex items-center justify-between'>
+    <div class='flex items-center justify-center rounded-lg bg-gradient-to-br from-blue-400 via-blue-500 to-cyan-500 w-10 h-10'>
+      <p class='text-white font-extrabold'>ML</p>
+    </div>
+    <p-tag severity="success" value="В работе" [rounded]="true" />
+  </div>
+  <h2 class='text-lg font-bold my-1'>{{project.title}}</h2>
+  <div class='flex items-center justify-between'>
+    <p class='text-sm text-gray-400'>15 задач</p>
+    <p class='text-sm text-gray-400'>До: 15 авг</p>
+  </div>
+  <div class='mt-3'>
+    <app-small-progress />
+    <p class='mt-1'>70% завершено</p>
+  </div>
+  <div class='flex items-center justify-between mt-3'>
+    <p-avatar-group>
+      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" size="normal" shape="circle" />
+      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" size="normal" shape="circle" />
+    </p-avatar-group>
+    <p class='text-sm text-gray-400'>2 участника</p>
+  </div>
+</div>

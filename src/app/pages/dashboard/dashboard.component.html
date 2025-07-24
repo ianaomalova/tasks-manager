@@ -1,30 +1,30 @@
 <div class="px-7 py-1">
-  <div class="grid grid-cols-3 gap-6 mb-8">
-    <div class="max-w-full">
-      <app-card
-        color="bg-[var(--purple-light)]"
-        title="Active projects"
-        img="/png/projects/active-projects.svg"
-        info="92"
-      />
-      <app-card
-        color="bg-[var(--yellow)]"
-        title="On Going Project"
-        img="/png/projects/ongoing-projects.svg"
-        info="35"
-      />
-      <app-card
-        color="bg-[var(--pink)]"
-        title="Working hours"
-        img="/png/projects/working-hours.svg"
-        info="19h 9m"
-      />
-    </div>
-    <div class='col-span-2'>
-      <app-statistic/>
-    </div>
+  <div class='flex items-center justify-between gap-6'>
+    <app-card
+      color="bg-gradient-to-br from-blue-300 via-blue-500 to-cyan-500"
+      title="Active projects"
+      img="/png/projects/active-projects.svg"
+      info="92"
+    />
+    <app-card
+      color="bg-gradient-to-br from-indigo-300 via-purple-500 to-pink-500"
+      title="On Going Project"
+      img="/png/projects/ongoing-projects.svg"
+      info="35"
+    />
+    <app-card
+      color="bg-gradient-to-br from-yellow-200 via-yellow-400 to-yellow-600"
+      title="Working hours"
+      img="/png/projects/working-hours.svg"
+      info="19h 9m"
+    />
   </div>
-
+  <div>
+    <app-projects />
+  </div>
+  <div class='mb-10 mt-3'>
+    <app-statistic/>
+  </div>
   <div class='flex items-center justify-between'>
     <h2 class='mb-4 font-medium text-2xl text-[var(--text)]'>Last tasks <span
       class='text-gray-500 text-2xl'>({{ filteredTasks.length }})</span></h2>

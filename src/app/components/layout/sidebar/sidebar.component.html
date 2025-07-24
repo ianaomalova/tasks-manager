@@ -125,13 +125,25 @@
 
 <p-popover #profile>
   <div>
-    <p class='text-xl font-bold mb-2'>{{ userName }}</p>
+    <div class="bg-linear-65 from-[var(--primary)] to-purple-400 rounded-xl p-2">
+      <div class="account-info flex items-start gap-4">
+        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" size="large"
+                  shape="circle"/>
+        <div class="text-white flex flex-col gap-1">
+          <h3>{{ userName }}</h3>
+          <p class='font-light'>{{ email }}</p>
+        </div>
+      </div>
+    </div>
     <button
       class='bg-[var(--primary)] text-white rounded-xl px-3 py-2 cursor-pointer
-             hover:shadow-lg transition-all duration-300 hover:scale-105'
+             hover:shadow-lg transition-all duration-300 hover:scale-105 mt-5 w-full'
       (click)='logout()'
     >
       Log out
     </button>
+  </div>
+  <div>
+
   </div>
 </p-popover>

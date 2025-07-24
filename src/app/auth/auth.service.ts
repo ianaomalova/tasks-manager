@@ -8,6 +8,8 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged, signOut
 } from '@angular/fire/auth';
+import {doc, Firestore, setDoc} from '@angular/fire/firestore';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,7 @@ export class AuthService {
   public user$ = this.userSubject$.asObservable();
   public authInitialized$ = this.authInitializedSubject.asObservable();
 
-  constructor(private auth: Auth) {
+  constructor(private auth: Auth, private firestore: Firestore) {
     onAuthStateChanged(this.auth, user => {
       this.userSubject$.next(user);
 
@@ -51,6 +53,15 @@ export class AuthService {
           const user = userCredentials.user;
           return from(updateProfile(user, {displayName: `${firstName} ${lastName}`}))
             .pipe(
+              switchMap(() => {
+                const userDoc = doc(this.firestore, `users/${user.uid}`);
+                return from(setDoc(userDoc, {
+                  uid: user.uid,
+                  email: user.email,
+                  displayName: `${firstName} ${lastName}`,
+                  createdAt: new Date().toISOString()
+                }))
+              }),
               map(() => user)
             )
         })

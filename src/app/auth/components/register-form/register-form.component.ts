@@ -20,7 +20,7 @@ export function passwordMatchValidator(passwordField: string, confirmPasswordFie
     const confirmPasswordControl = formGroup.get(confirmPasswordField);
 
     if (!passwordControl || !confirmPasswordControl) {
-      return null; // если поля не найдены
+      return null;
     }
 
     if (confirmPasswordControl.errors && !confirmPasswordControl.errors['passwordMismatch']) {
@@ -65,15 +65,6 @@ export class RegisterFormComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-
-    this.form.valueChanges.subscribe(() => {
-      console.log('Form errors:', this.form.errors);
-      console.log('First name errors:', this.form.get('first_name')?.errors);
-      console.log('Last name errors:', this.form.get('last_name')?.errors);
-      console.log('Email errors:', this.form.get('email')?.errors);
-      console.log('Password errors:', this.form.get('password')?.errors);
-      console.log('Confirm password errors:', this.form.get('confirm_password')?.errors);
-    });
   }
 
   initForm() {
