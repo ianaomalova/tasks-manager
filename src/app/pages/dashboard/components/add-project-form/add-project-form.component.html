@@ -2,98 +2,254 @@
   [(visible)]="visible"
   [dismissableMask]="true"
   [modal]="true"
+  [showHeader]="false"
+  [contentStyle]="{ 'padding': '0' }"
   (onHide)="onDialogClose()"
 >
-  <div class="card flex justify-center w-200">
-    <p-stepper [(value)]="activeStep" class="basis-[40rem]">
-      <p-step-list>
-        <p-step [value]="1" class="flex flex-row flex-auto gap-2">
-          <ng-template #content let-activateCallback="activateCallback" let-value="value">
-            <button class="bg-transparent border-0 inline-flex flex-col gap-2" (click)="activateCallback()">
-                        <span
-                          class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
-                          [ngClass]="{
-                                'bg-primary text-primary-contrast border-primary': value <= activeStep,
-                                'border-surface': value > activeStep
-                            }"
-                        >
-                            <i class="pi pi-user"></i>
-                        </span>
+  <div
+    class="relative w-210 py-4 px-6 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-tl-xl rounded-tr-xl text-white">
+    <button
+      class="absolute cursor-pointer top-4 right-4 rounded-full
+      p-2 transition-colors hover:bg-white/20"
+      (click)='onDialogClose()'
+    >
+      <lucide-angular [img]='X'/>
+    </button>
+    <h2 class="mb-2 text-2xl font-bold">Создать новый проект</h2>
+    <p class="text-indigo-100">Шаг {{ currentStep }} из 3</p>
+
+    <div class="mt-4 h-2 rounded-full bg-white/20">
+      <div
+        [ngStyle]="{ 'width.%': (currentStep / 3) * 100 }"
+        class="h-2 rounded-full bg-white transition-all duration-500 ease-out"
+      ></div>
+    </div>
+  </div>
+  <div class="p-6">
+    <form [formGroup]='form'>
+      @if (currentStep === 1) {
+        <div class="animate-in slide-in-from-right space-y-6 duration-300">
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-gray-700">
+              Название проекта *
+            </label>
+            <input
+              formControlName='title'
+              type="text"
+              class="w-full rounded-xl border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:ring-2 focus:ring-indigo-500"
+              placeholder="Введите название проекта"
+            />
+          </div>
+
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-gray-700">
+              Описание
+            </label>
+            <textarea
+              formControlName='description'
+              rows={4}
+              class="w-full resize-none rounded-xl border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:ring-2 focus:ring-indigo-500"
+              placeholder="Опишите цели и задачи проекта..."
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-gray-700">
+              Дедлайн *
+            </label>
+            <input
+              formControlName='deadline'
+              type="date"
+              value={formData.deadline}
+              class="w-full rounded-xl border border-gray-200 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
+
+          <div>
+            <label class="mb-3 block text-sm font-semibold text-gray-700">
+              Цвет проекта
+            </label>
+            <div class='flex items-center gap-3'>
+              @for (color of bgColors; track color) {
+                <button
+                  (click)='setColor(color)'
+                  class='h-10 w-10 cursor-pointer rounded-full transition-all hover:scale-110'
+                  [ngClass]="{'ring-2 ring-gray-400 ring-offset-2' : color === currentColor}"
+                  [ngStyle]="{ 'background-color': color }"
+                ></button>
+              }
+            </div>
+          </div>
+
+          <div class='flex justify-end'>
+            <button
+              [disabled]='validateOneStep()'
+              class='bg-[var(--primary)] text-white rounded-lg px-3 py-2
+              cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-110'
+              [ngClass]="{'bg-gray-300 cursor-not-allowed' : validateOneStep()}"
+              (click)='currentStep = 2'
+            >
+              Далее
             </button>
-          </ng-template>
-        </p-step>
+          </div>
+        </div>
+      }
 
-        <p-step [value]="2" class="flex flex-row flex-auto gap-2">
-          <ng-template #content let-activateCallback="activateCallback" let-value="value">
-            <button class="bg-transparent border-0 inline-flex flex-col gap-2" (click)="activateCallback()">
-                        <span
-                          class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
-                          [ngClass]="{
-                                'bg-primary text-primary-contrast border-primary': value <= activeStep,
-                                'border-surface': value > activeStep
-                            }"
-                        >
-                            <i class="pi pi-star"></i>
-                        </span>
-            </button>
-          </ng-template>
-        </p-step>
+      @if (currentStep === 2) {
+        <div class="animate-in slide-in-from-right space-y-6 duration-300">
+          <div class="flex items-center justify-between">
+            <h3 class="flex items-center gap-2 text-lg font-semibold text-gray-800">
+              <lucide-angular [img]='Target' class="h-5 w-5 text-indigo-600"/>
+              Задачи проекта
+            </h3>
+            <span class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-500">
+                  {{tasks.length}} задач
+            </span>
+          </div>
 
-        <p-step [value]="3" class="flex flex-row flex-auto gap-2">
-          <ng-template #content let-activateCallback="activateCallback" let-value="value">
-            <button class="bg-transparent border-0 inline-flex flex-col gap-2" (click)="activateCallback()">
-                        <span
-                          class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
-                          [ngClass]="{
-                                'bg-primary text-primary-contrast border-primary': value <= activeStep,
-                                'border-surface': value > activeStep
-                            }"
-                        >
-                            <i class="pi pi-id-card"></i>
-                        </span>
-            </button>
-          </ng-template>
-        </p-step>
-      </p-step-list>
-
-      <p-step-panels>
-        <p-step-panel [value]="1">
-          <ng-template #content let-activateCallback="activateCallback">
-            <div class="flex flex-col gap-2 mx-auto" style="min-height: 16rem; max-width: 20rem">
-              <div class="text-center mt-4 mb-4 text-xl font-semibold">Create your account</div>
-            </div>
-            <div class="flex pt-6 justify-end">
-              <p-button (onClick)="activateCallback(2)" label="Next" icon="pi pi-arrow-right" iconPos="right" />
-            </div>
-          </ng-template>
-        </p-step-panel>
-
-        <p-step-panel [value]="2">
-          <ng-template #content let-activateCallback="activateCallback">
-            <div class="flex flex-col gap-2 mx-auto" style="min-height: 16rem; max-width: 24rem">
-              <div class="text-center mt-4 mb-4 text-xl font-semibold">Choose your interests</div>
-            </div>
-            <div class="flex pt-6 justify-between">
-              <p-button (onClick)="activateCallback(1)" label="Back" severity="secondary" icon="pi pi-arrow-left" />
-              <p-button (onClick)="activateCallback(3)" label="Next" icon="pi pi-arrow-right" iconPos="right" />
-            </div>
-          </ng-template>
-        </p-step-panel>
-
-        <p-step-panel [value]="3">
-          <ng-template #content let-activateCallback="activateCallback">
-            <div class="flex flex-col items-center gap-2 mx-auto" style="min-height: 16rem; max-width: 24rem">
-              <div class="text-center mt-4 mb-4 text-xl font-semibold">Account created successfully</div>
-              <div class="text-center">
-                <img alt="logo" src="https://primefaces.org/cdn/primeng/images/stepper/content.svg" />
+          <div formArrayName='tasks' class='space-y-3'>
+            @for (taskControl of tasks.controls; track taskControl; let index = $index) {
+              <div [formGroupName]='index'
+                   class='group relative transform rounded-xl border border-gray-200 bg-white p-4 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-300 hover:shadow-md'>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-3">
+                    <div
+                      class="flex bg-red bg-indigo-500 h-8 w-8 items-center justify-center rounded-full text-sm font-medium text-white shadow-lg"
+                    >
+                      {{ index + 1 }}
+                    </div>
+                    <span class="font-medium text-gray-800">
+                          {{ taskControl.value }}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    (click)="removeTask(index)"
+                    class="rounded-full p-2 text-red-400 opacity-0 transition-all group-hover:opacity-100 hover:bg-red-50 hover:text-red-600"
+                  >
+                    <lucide-angular [img]='Trash' class='h-4 w-4'/>
+                  </button>
+                </div>
               </div>
+            }
+          </div>
+          <div>
+            @if (isAddingTask) {
+              <div class="rounded-xl border-2 border-indigo-400 p-6">
+                <div class="mb-4 flex items-center space-x-3">
+                  <div
+                    class="flex h-8 w-8 bg-indigo-500 items-center justify-center rounded-full text-sm font-medium text-white"
+                  >
+                    {{ tasks.length + 1 }}
+                  </div>
+                  <input
+                    [(ngModel)]="newTaskTitle"
+                    [ngModelOptions]="{standalone: true}"
+                    type="text"
+                    class="flex-1 rounded-lg border border-gray-200 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-indigo-500"
+                    placeholder="Название задачи..."
+                    autoFocus
+                  />
+                </div>
+                <div class="flex justify-end space-x-2">
+                  <button
+                    type="button"
+                    (click)="cancelAddTask()"
+                    class="px-4 py-2 text-sm text-gray-500 cursor-pointer transition-colors hover:text-gray-700"
+                  >
+                    Отмена
+                  </button>
+                  <button
+                    type="button"
+                    (click)='addTask()'
+                    class="rounded-lg bg-indigo-600 px-6 cursor-pointer py-2 text-sm text-white transition-all hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Добавить
+                  </button>
+                </div>
+              </div>
+            }
+            @else {
+              <button
+                (click)='isAddingTask = true'
+                type="button"
+                class="group w-full cursor-pointer rounded-xl border-2 border-dashed border-gray-300 p-8 transition-all hover:border-indigo-400 hover:bg-indigo-50/50"
+              >
+                <div class="flex flex-col items-center space-y-3">
+                  <div
+                    class="flex bg-indigo-500 h-12 w-12 cursor-pointer items-center justify-center rounded-full text-white shadow-lg transition-transform group-hover:scale-110"
+                  >
+                    <lucide-angular class="h-6 w-6" [img]='Plus'/>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-gray-700 transition-colors group-hover:text-indigo-600">
+                      Добавить задачу
+                    </div>
+                    <div class="text-sm text-gray-500">
+                      Создайте новую задачу для проекта
+                    </div>
+                  </div>
+                </div>
+              </button>
+            }
+          </div>
+          @if (tasks.length === 0) {
+            <div class="py-5 text-center">
+              <div
+                class="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-indigo-100 to-purple-100">
+                <lucide-angular [img]='Target' class="h-10 w-10 text-indigo-500"/>
+              </div>
+              <h4 class="mb-2 text-xl font-semibold text-gray-800">
+                Начните с задач
+              </h4>
+              <p class="mx-auto max-w-2xl text-gray-500">
+                Добавьте основные задачи проекта. Их можно детализировать позже — разбить на подзадачи, уточнить сроки и
+                описание.
+                Или просто пропустите этот шаг — вы всегда сможете вернуться к настройкам, когда будет удобно.
+              </p>
             </div>
-            <div class="flex pt-6 justify-start">
-              <p-button (onClick)="activateCallback(2)" label="Back" severity="secondary" icon="pi pi-arrow-left" />
-            </div>
-          </ng-template>
-        </p-step-panel>
-      </p-step-panels>
-    </p-stepper>
+          }
+
+          <div class='flex justify-between'>
+            <button
+              class='bg-gray-200 text-gray-700 rounded-lg px-3 py-2
+              cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-110'
+              (click)='currentStep = 1'
+            >
+              Назад
+            </button>
+
+            <button
+              class='bg-[var(--primary)] text-white rounded-lg px-3 py-2
+              cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-110'
+              (click)='currentStep = 3'
+            >
+              Далее
+            </button>
+          </div>
+        </div>
+      }
+      @if (currentStep === 3) {
+        <div class="animate-in slide-in-from-right space-y-6 duration-300">
+
+          <div class='flex justify-between'>
+            <button
+              class='bg-gray-200 text-gray-700 rounded-lg px-3 py-2
+              cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-110'
+              (click)='currentStep = 2'
+            >
+              Назад
+            </button>
+
+            <button
+              class='bg-[var(--primary)] text-white rounded-lg px-3 py-2
+              cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-110'
+            >
+              Сохранить проект
+            </button>
+          </div>
+        </div>
+      }
+    </form>
   </div>
 </p-dialog>

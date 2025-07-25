@@ -1,11 +1,12 @@
-import {Status} from './Status';
 import {ProjectColor} from '../configs/projects-styles.config';
+
+export type ProjectStatus = 'Not Started' | 'In Progress'| 'Complete' | 'On Paused' | 'Archive';
 
 export interface Project {
   id: string;
   title: string;
   description: string;
-  status: Status;
+  status: ProjectStatus;
   dueDate: string;
   createdAt: string;
   authorId: string
@@ -13,3 +14,4 @@ export interface Project {
   taskIds: string[];
   color: ProjectColor;
 }
+
