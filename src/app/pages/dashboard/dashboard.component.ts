@@ -21,9 +21,10 @@ import {ProjectsComponent} from './components/projects/projects.component';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
+
 export class DashboardComponent {
-  visibleEditModal: boolean = false;
-  visibleAddModal: boolean = false;
+  visibleEditTaskModal: boolean = false;
+  visibleAddTaskModal: boolean = false;
   selectedTask!: Task;
   protected readonly tasks: Task[] = tasks;
   filteredTasks = tasks;
@@ -48,8 +49,8 @@ export class DashboardComponent {
   }
 
   updateTask(updatedTask: Task) {
-    this.visibleEditModal = false;
-    this.visibleAddModal = false;
+    this.visibleEditTaskModal = false;
+    this.visibleAddTaskModal = false;
     const idx = this.tasks.findIndex(t => t.id === updatedTask.id);
     if (idx > -1) {
       this.tasks[idx] = updatedTask;
@@ -61,12 +62,12 @@ export class DashboardComponent {
   showDialog(task: Task, name: string) {
     this.selectedTask = task;
     switch (name) {
-      case 'edit':
-        this.visibleEditModal = true;
+      case 'editTask':
+        this.visibleEditTaskModal = true;
         break;
 
-      case 'add':
-        this.visibleAddModal = true;
+      case 'addTask':
+        this.visibleAddTaskModal = true;
         break;
     }
   }

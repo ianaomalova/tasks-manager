@@ -48,5 +48,42 @@ export const projects: Project[] = [
     assignedUserIds: ['1', '2', '3'],
     taskIds: ['1', '2', '3'],
     color: 'purple'
-  }
+  },
+  {
+    id: '4',
+    title: 'Design biba boba',
+    description: 'vcbvbvcb',
+    status: 'In Progress',
+    dueDate: '2019-05-19',
+    createdAt: '2019-05-19',
+    authorId: '2',
+    assignedUserIds: ['1', '2', '3'],
+    taskIds: ['1', '2', '3'],
+    color: 'purple'
+  },
+  {
+    id: '4',
+    title: 'Design biba boba',
+    description: 'vcbvbvcb',
+    status: 'In Progress',
+    dueDate: '2019-05-19',
+    createdAt: '2019-05-19',
+    authorId: '2',
+    assignedUserIds: ['1', '2', '3'],
+    taskIds: ['1', '2', '3'],
+    color: 'purple'
+  },
+  {
+    id: '4',
+    title: 'Design biba boba',
+    description: 'vcbvbvcb',
+    status: 'In Progress',
+    dueDate: '2019-05-19',
+    createdAt: '2019-05-19',
+    authorId: '2',
+    assignedUserIds: ['1', '2', '3'],
+    taskIds: ['1', '2', '3'],
+    color: 'purple'
+  },
+
 ]
