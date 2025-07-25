@@ -11,6 +11,7 @@ export const projects: Project[] = [
     authorId: '2',
     assignedUserIds: ['1', '2', '3'],
     taskIds: ['1', '2', '3'],
+    color: 'blue'
   },
   {
     id: '2',
@@ -22,6 +23,7 @@ export const projects: Project[] = [
     authorId: '2',
     assignedUserIds: ['1', '2', '3'],
     taskIds: ['1', '2', '3'],
+    color: 'red'
   },
   {
     id: '3',
@@ -33,6 +35,7 @@ export const projects: Project[] = [
     authorId: '2',
     assignedUserIds: ['1', '2', '3'],
     taskIds: ['1', '2', '3'],
+    color: 'yellow'
   },
   {
     id: '4',
@@ -44,5 +47,6 @@ export const projects: Project[] = [
     authorId: '2',
     assignedUserIds: ['1', '2', '3'],
     taskIds: ['1', '2', '3'],
+    color: 'purple'
   }
 ]

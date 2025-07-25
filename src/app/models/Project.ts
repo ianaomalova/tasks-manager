@@ -1,4 +1,5 @@
 import {Status} from './Status';
+import {ProjectColor} from '../configs/projects-styles.config';
 
 export interface Project {
   id: string;
@@ -10,4 +11,5 @@ export interface Project {
   authorId: string
   assignedUserIds: string[];
   taskIds: string[];
+  color: ProjectColor;
 }
