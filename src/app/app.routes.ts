@@ -10,6 +10,7 @@ import {AuthPageComponent} from './auth/components/auth-page/auth-page.component
 import {MainLayoutComponent} from './components/layout/main-layout/main-layout.component';
 import {AuthLayoutComponent} from './auth/components/auth-layout/auth-layout.component';
 import {AuthGuard} from './auth/auth.guard';
+import {ProfileComponent} from './pages/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -24,7 +25,7 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
-        data: { title: 'Dashboard' },
+        data: { title: 'Дашборд' },
         canActivate: [AuthGuard]
       },
       {
@@ -36,31 +37,37 @@ export const routes: Routes = [
       {
         path: 'messages',
         component: MessagesComponent,
-        data: { title: 'Messages' },
+        data: { title: 'Сообщения' },
         canActivate: [AuthGuard]
       },
       {
         path: 'report',
         component: ReportsComponent,
-        data: { title: 'Report' },
+        data: { title: 'Отчетность' },
         canActivate: [AuthGuard]
       },
       {
         path: 'settings',
         component: SettingsComponent,
-        data: { title: 'Settings' },
+        data: { title: 'Настройки' },
         canActivate: [AuthGuard]
       },
       {
         path: 'schedule',
         component: ScheduleComponent,
-        data: { title: 'Schedule' },
+        data: { title: 'Календарь' },
         canActivate: [AuthGuard]
       },
       {
         path: 'team',
         component: TeamComponent,
-        data: { title: 'Team' },
+        data: { title: 'Команда' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        data: { title: 'Профиль' },
         canActivate: [AuthGuard]
       },
     ]

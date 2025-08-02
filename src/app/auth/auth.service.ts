@@ -8,12 +8,14 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged, signOut
 } from '@angular/fire/auth';
-import {doc, Firestore, setDoc} from '@angular/fire/firestore';
+import {doc, Firestore, getDoc, setDoc, updateDoc} from '@angular/fire/firestore';
+import {UserProfileBasicInfo} from '../models/User';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   private userSubject$ = new BehaviorSubject<User | null>(null);
   private authInitializedSubject = new BehaviorSubject<boolean>(false);
@@ -70,6 +72,29 @@ export class AuthService {
 
   logout(): Observable<void> {
     return from(signOut(this.auth));
+  }
+
+  getUserProfile(uid: string) {
+    const userDoc = doc(this.firestore, `user`, uid);
+    return from(getDoc(userDoc))
+      .pipe(
+        map(doc => doc.data())
+      )
+  }
+
+  updateUserProfile(uid: string, profileData: UserProfileBasicInfo) {
+    const userDoc = doc(this.firestore, `user`, uid);
+    return from(updateDoc(userDoc, profileData))
+      .pipe(
+        switchMap(() => {
+          const user = this.getCurrentUser();
+          if (user && profileData.avatar) {
+            return from(updateProfile(user, {photoURL: profileData.avatar}));
+          }
+
+          return from (Promise.resolve())
+        })
+      )
   }
 
   isAuthenticated() {

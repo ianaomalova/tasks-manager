@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Step, StepList, StepPanel, StepPanels, Stepper} from 'primeng/stepper';
 import {NgClass, NgStyle} from '@angular/common';
-import {Button} from 'primeng/button';
 import {
   FormArray,
   FormBuilder,

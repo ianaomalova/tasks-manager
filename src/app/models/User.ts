@@ -12,3 +12,5 @@ export interface UserProfile {
   skills: string[];
   teams: string[];
 }
+
+export type UserProfileBasicInfo = Omit<UserProfile, 'id' | 'projects' | 'roles' | 'createdAt' | 'lastLoginAt'>;
